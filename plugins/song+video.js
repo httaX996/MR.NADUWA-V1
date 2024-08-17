@@ -11,7 +11,7 @@ async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender
 try{
 if(!q) return reply("please give me url or title")
 const search = await yts(q)
-const data = search.videos[0);
+const data = search.videos[0];
 const url = data.url
 
 let desc = `
@@ -44,4 +44,3 @@ console.log(e)
 reply(`${e}`)
 }
 })
-  
