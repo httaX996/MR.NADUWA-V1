@@ -28,8 +28,7 @@ views: ${data.views}
 ✅MADE BY MR.NADUWA-V1✅
 `
 
-await conn.sendMessage(from,{image:{url: data,thumbnail,caption:desc},{quoted:mek});
-
+await conn.sendMessage(from,{image:{url: data,thumbnail},caption:desc},{quoted:mek});
 //download audio
 
 let down = await fg.yta(url)
