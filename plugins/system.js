@@ -1,6 +1,7 @@
 const config = require('../config')
 const {cmd , commands} = require('../command')
 const os = required("os")
+const {runtime} = require(`../lib/functions`)
 
 cmd({
     pattern: "system",
