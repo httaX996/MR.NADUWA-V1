@@ -27,14 +27,20 @@ let desc = `
 ▋➥ *ago*: ${data.ago}
 ▋➥ *Author*:${data.Author}
 ▬▬▬▬▬▬▬▬▬▬▬▬◆
+
+
+
+
 use prefix {.}  example {.song new rap,video new rap}
+
+
+
+
 ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
 ▋*_POWER BY MR.NADUWA_* ▌
 ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
 
 
-
-✅MADE BY MR.NADUWA-V1✅
 `
 
 await conn.sendMessage(from,{image:{url: data.thumbnail},caption:desc},{quoted:mek});
