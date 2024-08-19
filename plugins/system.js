@@ -1,12 +1,11 @@
 const config = require('../config')
 const {cmd , commands} = require('../command')
-const os = required("os")
-const {runtime} = require(`../lib/functions`)
-
+const os = require("os")
+const {runtime} = require('../lib/functions')
 cmd({
     pattern: "system",
     alias: ["status","botinfo"],
-    desc: "Check up time ,ram usage and more",
+    desc: "Check up time , ram usage and more",
     category: "main",
     filename: __filename
 },
@@ -15,15 +14,13 @@ try{
 let status = `*Uptime:*  ${runtime(process.uptime())}
 *Ram usage:* ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB
 *HostName:* ${os.hostname()}
-*Owner:* MR NADUWA-V1-DEPLY BY MR-NADUWA
+*Owner:* MR.NADUWA-V1 DEPLY BY MR-NADUWA
 `
-
 return reply(`${status}`)
   
 }catch(e){
 console.log(e)
 reply(`${e}`)
 
-    
 }
 })
