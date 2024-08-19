@@ -18,11 +18,20 @@ let desc = `
 ✅MR.NADUWA-V1 SONG DOWNLOADER✅
 
 
-title: ${data.title}
-description: ${data.description}
-time: ${data.timestamp}
-ago: ${data.ago}
-views: ${data.views}
+▬▬▬▬▬▬▬▬▬▬▬▬◆
+▋➥ *title*: ${data.title}
+▋➥*description*: ${data.description}
+▌➥*time*: ${data.timestamp}
+▋➥*ago*: ${data.ago}
+▌➥*views*: ${data.views}
+▋➥ *ago*: ${data.ago}
+▋➥ *Author*:${data.Author}
+▬▬▬▬▬▬▬▬▬▬▬▬◆
+use prefix {.}  example {.song new rap,video new rap}
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+▋*_POWER BY MR.NADUWA_* ▌
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+
 
 
 ✅MADE BY MR.NADUWA-V1✅
