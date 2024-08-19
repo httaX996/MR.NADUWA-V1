@@ -82,14 +82,28 @@ let desc = `
 ✅MR.NADUWA-V1 VIDEO DOWNLOADER✅
 
 
-title: ${data.title}
-description: ${data.description}
-time: ${data.timestamp}
-ago: ${data.ago}
-views: ${data.views}
+▬▬▬▬▬▬▬▬▬▬▬▬◆
+▋➥ *title*: ${data.title}
+▋➥*description*: ${data.description}
+▌➥*time*: ${data.timestamp}
+▋➥*ago*: ${data.ago}
+▌➥*views*: ${data.views}
+▋➥ *ago*: ${data.ago}
+▋➥ *Author*:${data.Author}
+▬▬▬▬▬▬▬▬▬▬▬▬◆
 
 
-✅MADE BY MR.NADUWA-V1✅
+
+
+use prefix {.}  example {.song new rap,video new rap}
+
+
+
+
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+▋*_POWER BY MR.NADUWA_* ▌
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+
 `
 
 await conn.sendMessage(from,{image:{url: data.thumbnail},caption:desc},{quoted:mek});
