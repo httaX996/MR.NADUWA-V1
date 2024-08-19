@@ -18,11 +18,11 @@ let status = `*Uptime:*  ${runtime(process.uptime())}
 *Owner:* MR.NADUWA-V1✅DEPLY BY MR-NADUWA
 `
 
-return rereply(`${status}`)
+return reply(`${status}`)
   
 }catch(e){
-  console.log(e)
-  reply(`${e}`)
+console.log(e)
+reply(`${e}`)
 
     
 }
