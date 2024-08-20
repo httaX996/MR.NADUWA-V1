@@ -20,10 +20,10 @@ let desc = `
 
 ▬▬▬▬▬▬▬▬▬▬▬▬◆
 ▋➥ *title*: ${data.title}
-▋➥*description*: ${data.description}
-▌➥*time*: ${data.timestamp}
-▋➥*ago*: ${data.ago}
-▌➥*views*: ${data.views}
+▋➥ *description*: ${data.description}
+▌➥ *time*: ${data.timestamp}
+▋➥ *ago*: ${data.ago}
+▌➥ *views*: ${data.views}
 ▋➥ *ago*: ${data.ago}
 ▋➥ *Author*:${data.Author}
 ▬▬▬▬▬▬▬▬▬▬▬▬◆
@@ -36,9 +36,9 @@ use prefix {.}  example {.song new rap,video new rap}
 
 
 
-▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
-▋*_POWER BY MR.NADUWA_* ▌
-▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+▋ *_POWER BY MR.NADUWA_*  ▌
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
 
 
 `
@@ -84,10 +84,10 @@ let desc = `
 
 ▬▬▬▬▬▬▬▬▬▬▬▬◆
 ▋➥ *title*: ${data.title}
-▋➥*description*: ${data.description}
-▌➥*time*: ${data.timestamp}
-▋➥*ago*: ${data.ago}
-▌➥*views*: ${data.views}
+▋➥ *description*: ${data.description}
+▌➥ *time*: ${data.timestamp}
+▋➥ *ago*: ${data.ago}
+▌➥ *views*: ${data.views}
 ▋➥ *ago*: ${data.ago}
 ▋➥ *Author*:${data.Author}
 ▬▬▬▬▬▬▬▬▬▬▬▬◆
@@ -100,9 +100,9 @@ use prefix {.}  example {.song new rap,video new rap}
 
 
 
-▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
-▋*_POWER BY MR.NADUWA_* ▌
-▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+▋ *_POWER BY MR.NADUWA_*  ▌
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
 
 `
 
