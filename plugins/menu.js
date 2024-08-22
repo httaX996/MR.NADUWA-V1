@@ -50,10 +50,7 @@ ${menu.convert}
 ${menu.search}
 
 ✅ *_POWERD BY MR.NADUWA-V1_* ✅
-
-      
-    
-    ` 
+` 
 await conn.sendMessage(from,{image:{url:"https://telegra.ph/file/69c6550dd74cc37760b73.jpg"},caption:madeMenu},{quoted:mek})
   
 
