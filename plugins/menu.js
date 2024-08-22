@@ -54,7 +54,7 @@ ${menu.search}
       
     
     ` 
-await conn.sendMessage(from,{text:madeMenu,{quoted:mek})
+await conn.sendMessage(from,{image:{url:https://telegra.ph/file/69c6550dd74cc37760b73.jpg},caption:madeMenu},{quoted:mek})
   
 
 }catch(e){
