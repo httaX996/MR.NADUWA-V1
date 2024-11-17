@@ -8,7 +8,6 @@ fetchLatestBaileysVersion,
 Browsers
 } = require('@whiskeysockets/baileys')
 
-const l = console.log 
 const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep, fetchJson } = require('./lib/functions')
 const fs = require('fs')
 const P = require('pino')
@@ -18,7 +17,7 @@ const util = require('util')
 const { sms,downloadMediaMessage } = require('./lib/msg')
 const axios = require('axios')
 const { File } = require('megajs')
-
+const prefix = '.'
 
 const ownerNumber = ['94767073275']
 
@@ -40,14 +39,6 @@ const port = process.env.PORT || 8000;
 //=============================================
 
 async function connectToWA() {
-//========conect mongodb==========
-const connectDB = require(`./lib/mongodb`)
-connectDB();
-//===============================
-const {readEnv} =  require(`./lib/database`)
-const config = await readEnv();
-const prefix = config.PREFIX
-//=================================
 console.log("Connecting wa bot 🧬...");
 const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/auth_info_baileys/')
 var { version } = await fetchLatestBaileysVersion()
