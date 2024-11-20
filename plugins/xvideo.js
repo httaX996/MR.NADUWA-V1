@@ -47,7 +47,10 @@ const msg = `
 await conn.sendMessage( from, { image: { url: xv_info.result.image || '' }, caption: msg }, { quoted: mek })
 
 // SEND VIDEO
-await conn.sendMessage(from, { document: { url: xv_info.result.dl_link }, mimetype: "video/mp4", fileName: xv_info.result.title, caption: xv_info.result.title }, { quoted: mek });
+await conn.sendMessage(from, { document: { url: xv_info.result.dl_link }, mimetype: "video/mp4", fileName: xv_info.result.title, caption: xv_info.result.title+ ".mp4",caption:"✅MADE BY MR.NADUWA-V1"}, { quoted: mek });
+await conn.sendMessage(from,{video: {url:xv_info.result.dl_link },mimetype:"video/mp4"},{quoted:mek})
+
+  
 
 
 } catch (error) {
