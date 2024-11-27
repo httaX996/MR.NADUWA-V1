@@ -3,7 +3,7 @@
 const { cmd } = require('../command')
 const { fetchJson } = require('../lib/functions')
 
-const apilink = 'moviesdatabase.p.rapidapi.com' // API LINK ( DO NOT CHANGE THIS!! )
+const apilink = '4c6b7697-8e3f-42ea-a0b0-70fa8ead4283' // API LINK ( DO NOT CHANGE THIS!! )
 
 
 
