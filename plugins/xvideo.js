@@ -3,7 +3,7 @@
 const { cmd } = require('../command')
 const { fetchJson } = require('../lib/functions')
 
-const apilink = '4c6b7697-8e3f-42ea-a0b0-70fa8ead4283' // API LINK ( DO NOT CHANGE THIS!! )
+const apilink = 'https://movie-database-alternative.p.rapidapi.com/?s=Avengers%20Endgame&r=json&page=1' // API LINK ( DO NOT CHANGE THIS!! )
 
 
 
