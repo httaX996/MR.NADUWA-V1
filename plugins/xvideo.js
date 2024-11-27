@@ -1,17 +1,9 @@
+// XVIDEO DOWNLOAD COMMAND
+
+const { cmd } = require('../command')
 const { fetchJson } = require('../lib/functions')
-const config = require('../config')
-const { cmd, commands } = require('../command')
 
-// FETCH API URL
-let baseUrl;
-(async () => {
-    let baseUrlGet = await fetchJson(`https://raw.githubusercontent.com/prabathLK/PUBLIC-URL-HOST-DB/main/public/url.json`)
-    baseUrl = baseUrlGet.api
-})();
-
-
-const yourName = "*MR.NADUWA-V1*"; 
-
+const apilink = 'https://www.dark-yasiya-api.site' // API LINK ( DO NOT CHANGE THIS!! )
 
 
 
@@ -39,21 +31,17 @@ const xv_info = await fetchJson(`${apilink}/download/xvideo?url=${xv_list.result
 const msg = `
            🔞 *XVIDEO DOWNLOADER* 🔞
 
- ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬◆
-▌➥ *Title* - ${xv_info.result.title}
-▌
-▌➥ *Views* - ${xv_info.result.views}
-▌
-▌➥ *Like* - ${xv_info.result.like}
-▌
-▌➥ *Deslike* - ${xv_info.result.deslike}
-▌
-▌➥ *Size* - ${xv_info.result.size}
-▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬◆
+ 
+ *Title* - ${xv_info.result.title}
 
-▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
-▋ *_POWER BY MR.NADUWA_*  ▌
-▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+ *Views* - ${xv_info.result.views}
+
+*Like* - ${xv_info.result.like}
+
+*Deslike* - ${xv_info.result.deslike}
+
+*Size* - ${xv_info.result.size}
+
 
 `
 
