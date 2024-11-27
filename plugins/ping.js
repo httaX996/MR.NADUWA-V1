@@ -1,4 +1,5 @@
-const Secktor = require('../lib')
+const config = require('../config')
+const {cmd , commands} = require('../command')
 Secktor.cmd({
         pattern: "ping",
         desc: "To check ping",
