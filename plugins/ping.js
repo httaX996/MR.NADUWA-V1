@@ -1,6 +1,6 @@
 const config = require('../config')
 const {cmd , commands} = require('../command')
-Secktor.cmd({
+        cmd({
         pattern: "ping",
         desc: "To check ping",
         category: "general",
