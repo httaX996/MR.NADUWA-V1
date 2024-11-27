@@ -1,9 +1,17 @@
-// XVIDEO DOWNLOAD COMMAND
-
-const { cmd } = require('../command')
 const { fetchJson } = require('../lib/functions')
+const config = require('../config')
+const { cmd, commands } = require('../command')
 
-const apilink = 'https://movie-database-alternative.p.rapidapi.com/?s=Avengers%20Endgame&r=json&page=1' // API LINK ( DO NOT CHANGE THIS!! )
+// FETCH API URL
+let baseUrl;
+(async () => {
+    let baseUrlGet = await fetchJson(`https://raw.githubusercontent.com/prabathLK/PUBLIC-URL-HOST-DB/main/public/url.json`)
+    baseUrl = baseUrlGet.api
+})();
+
+
+const yourName = "*MR.NADUWA-V1*"; 
+
 
 
 
