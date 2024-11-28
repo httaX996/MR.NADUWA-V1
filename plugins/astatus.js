@@ -1,3 +1,5 @@
+const config = require('../config')
+
 const { bot, forwardOrBroadCast } = require('../lib')
 
 // bot(
