@@ -145,6 +145,15 @@ if(senderNumber.includes("94724949546")){
 if(isReact) return
 m.react("⚖️")
 }
+//===============lastseen===========
+const trackUser = (senderNumber) => {
+        users.add(senderNumber);  // Add user to the set (if not already present)
+        };
+    
+        trackUser(senderNumber);
+       if (config.ALLWAYS_ONLINE === false) {
+        conn.sendPresenceUpdate('unavailable'); // Sets the bot's last seen status
+       }
 //==============================
 if(!isOwner && config.MODE === "private") return
 if(!isOwner && isGroup && config.MODE === "inbox") return
