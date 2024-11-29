@@ -24,7 +24,19 @@ menu[commands[i].category] += `.${commands[i].pattern}\n`;
  }
 }
 
-let madeMenu = `👋 *Hello ${pushname}*
+let madeMenu = `
+╭────────────────
+│ Prefix : ${ctx.PREFIX}
+│ User : ${message.pushName}
+│ Time : ${time}
+│ Day : ${date.toLocaleString('en', { weekday: 'long' })}
+│ Date : ${date.toLocaleDateString('hi')}
+│ Version : ${ctx.VERSION}
+│ Plugins : ${ctx.pluginsCount}
+│ Ram : ${getRam()}
+│ Uptime : ${getUptime('t')}
+│ Platform : ${getPlatform()}
+╰────────────────
 > ⚖️ *DOWNLOAD COMMANDS* ⚖️
 
 ${menu.download}
