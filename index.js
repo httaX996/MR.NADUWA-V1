@@ -151,7 +151,12 @@ m.react("⚖️")
             }else{
                 await conn.sendPresenceUpdate('unavailable', mek.key.remoteJid)
             }
-
+if(config.AUTO_TYPING === 'true'){
+                conn.sendPresenceUpdate('composing', mek.key.remoteJid)
+            }
+	    if(config.AUTO_RECORDING === 'true'){
+		conn.sendPresenceUpdate('recording', mek.key.remoteJid)
+            }
 //Auto-StatusDL==============
 
 if(body === "send" || body === "Send" || body === "Ewpm" || body === "ewpn" || body === "Dapan" || body === "dapan" || body === "oni" || body === "Oni" || body === "save" || body === "Save" || body === "ewanna" || body === "Ewanna" || body === "ewam" || body === "Ewam" || body === "sv" || body === "Sv"|| body === "දාන්න"|| body === "එවම්න"){
