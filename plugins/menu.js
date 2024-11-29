@@ -25,12 +25,12 @@ menu[commands[i].category] += `.${commands[i].pattern}\n`;
 }
 
 let madeMenu = `╭────────────────
-│ Prefix : ${PREFIX}
+│ Prefix : ${prefix}
 │ User : ${pushName}
 │ Time : ${time}
 │ Day : ${date.toLocaleString('en', { weekday: 'long' })}
 │ Date : ${date.toLocaleDateString('hi')}
-│ Version : ${VERSION}
+│ Version : ${version}
 │ Plugins : ${pluginsCount}
 │ Ram : ${getRam()}
 │ Uptime : ${getUptime('t')}
