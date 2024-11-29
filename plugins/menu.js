@@ -24,8 +24,7 @@ menu[commands[i].category] += `.${commands[i].pattern}\n`;
  }
 }
 
-let madeMenu = `
-╭────────────────
+let madeMenu = `╭────────────────
 │ Prefix : ${ctx.PREFIX}
 │ User : ${message.pushName}
 │ Time : ${time}
