@@ -24,8 +24,8 @@ menu[commands[i].category] += `.${commands[i].pattern}\n`;
  }
 }
 
-let madeMenu = `╭────────────────
-│ Prefix : ${prefix}
+let madeMenu = `
+╭────────────────
 │ User : ${pushName}
 │ Time : ${time}
 │ Day : ${date.toLocaleString('en', { weekday: 'long' })}
