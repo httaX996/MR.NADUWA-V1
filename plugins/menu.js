@@ -25,42 +25,35 @@ menu[commands[i].category] += `.${commands[i].pattern}\n`;
 }
 
 let madeMenu = `
-╭────────────────
-│ User : ${pushName}
-│ Time : ${time}
-│ Day : ${date.toLocaleString('en', { weekday: 'long' })}
-│ Date : ${date.toLocaleDateString('hi')}
-│ Version : ${version}
-│ Plugins : ${pluginsCount}
-│ Ram : ${getRam()}
-│ Uptime : ${getUptime('t')}
-│ Platform : ${getPlatform()}
-╰────────────────
-> ⚖️ *DOWNLOAD COMMANDS* ⚖️
-
-${menu.download}
-
-> ⚖️ *MAIN COMMANDS* ⚖️
-
-${menu.main}
-
-> ⚖️ *GROUP COMMANDS* ⚖️
-
-${menu.group}
-
-> ⚖️ *OWNER COMMANDS* ⚖️
-
-${menu.owner}
-
-> ⚖️ *CONVERT COMMANDS* ⚖️
-
-${menu.convert}
-
-> ⚖️ *SEARCH COMMANDS* ⚖️
-
-${menu.search}
-
-✅ *_POWERD BY MR.NADUWA-V1_* ✅
+📍▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬📍
+▮👋 *Hello ${pushname}*
+▮   
+▮ 📍 *DOWNLOAD COMMANDS* 📍
+▮
+▮${menu.download}
+▮
+▮📍 *MAIN COMMANDS* 📍
+▮
+▮${menu.main}
+▮
+▮ 📍 *GROUP COMMANDS* 📍
+▮
+▮${menu.group}
+▮
+▮ 📍 *OWNER COMMANDS* 📍
+▮
+▮${menu.owner}
+▮
+▮📍 *CONVERT COMMANDS* 📍
+▮
+▮${menu.convert}
+▮
+▮📍 *SEARCH COMMANDS* 📍
+▮
+▮${menu.search}
+▮
+▮✅ *_POWERD BY MR.NADUWA-V1_* ✅
+📍▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬📍
 ` 
 await conn.sendMessage(from,{image:{url:"https://telegra.ph/file/69c6550dd74cc37760b73.jpg"},caption:madeMenu},{quoted:mek})
   
