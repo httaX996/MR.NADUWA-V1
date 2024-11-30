@@ -10,7 +10,6 @@ cmd({
 async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
 try{
 
-case prefix + 'film':
     if (!text) return m.reply('Silakan masukkan nomor halaman (1-2239).');
     
     const page = parseInt(text);
