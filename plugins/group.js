@@ -1,18 +1,16 @@
 const config = require('../config')
 const {cmd , commands} = require('../command')
 
-const { sck, sck1,cmd, jsonformat, botpic, TelegraPh, RandomXP, Config, tlang, warndb, sleep,getAdmin,getBuffer, prefix } = require('../lib')
-const moment = require("moment-timezone");
-const fs = require('fs-extra')
-const Levels = require("discord-xp");
-const { Sticker, createSticker, StickerTypes } = require("wa-sticker-formatter");
-//---------------------------------------------------------------------------
+
+
 cmd({
             pattern: "join",
             desc: "joins group by link",
             category: "owner",
             use: '<group link.>',
         },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
         async(Void, citel, text,{ isCreator }) => {
             if (!isCreator) return citel.reply(tlang().owner);
             if (!text) return citel.reply(`Please give me Query ${tlang().greet}`);
@@ -33,6 +31,8 @@ cmd({
             category: "group",
             use: '<reply to any image/video.>',
         },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
         async(Void, citel, text) => {
             if (!citel.quoted) return citel.reply(`*Mention any Image or video Sir.*`);
             let mime = citel.quoted.mtype
@@ -78,7 +78,10 @@ cmd({
         desc: "Sends official support group link.",
         category: "group",
         filename: __filename,
+	
     },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
     async(Void, citel, text) => {
         citel.reply(`*Check your Pm ${tlang().greet}*`);
         await Void.sendMessage(`${citel.sender}`, {
@@ -97,6 +100,8 @@ cmd({
             filename: __filename,
             use: '<quote|reply|number>',
         },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
         async(Void, citel, text,{ isCreator }) => {
              if (!citel.isGroup) return citel.reply('This Command is only for group.')
             const groupAdmins = await getAdmin(Void, citel)
@@ -114,6 +119,8 @@ cmd({
             filename: __filename,
 
         },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
         async(Void, citel, text,{ isCreator }) => {
 
             if (!citel.quoted) return citel.reply("Please reply to user");
@@ -131,6 +138,8 @@ cmd({
         category: "owner",
         filename: __filename,
     },
+	async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
     async(Void, citel, text,{ isCreator }) => {
         if(!isCreator) return citel.reply(tlang().owner)
         const groupMetadata = citel.isGroup ? await Void.groupMetadata(citel.chat).catch((e) => {}) : "";
@@ -151,6 +160,8 @@ cmd({
         category: "group",
         filename: __filename,
     },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
     async(Void, citel, text,{ isCreator }) => {
         if (!citel.isGroup) return citel.reply(tlang().group);
         const groupMetadata = citel.isGroup ? await Void.groupMetadata(citel.chat).catch((e) => {}) : "";
@@ -184,7 +195,10 @@ cmd({
             category: "group",
             filename: __filename,
             use: '<text>',
+	
         },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
         async(Void, citel, text) => {
             if (!text) return reply(`Example : ${
         prefix + command
@@ -219,6 +233,8 @@ cmd({
             filename: __filename,
             use: '<reply to a viewonce message.>',
         },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
         async(Void, citel, text) => {
             if (!citel.quoted) return reply("Please reply to any message Image or Video!");
             let mime = citel.quoted.mtype
@@ -243,6 +259,8 @@ cmd({
             filename: __filename,
             use: '<quote|reply|number>',
         },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
         async(Void, citel, text,{isCreator}) => {
             if (!isCreator) return citel.reply(tlang().owner)
             if (!citel.quoted) return citel.reply('Quote a user master.')
@@ -258,6 +276,8 @@ cmd({
             filename: __filename,
             use: `question;option1,option2,option3.....`,
         },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
         async(Void, citel, text,{ isCreator }) => {
             if (!isCreator) return citel.reply(tlang().owner)
             let [poll, opt] = text.split(";");
@@ -284,6 +304,8 @@ cmd({
             category: "group",
             filename: __filename,
         },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
         async(Void, citel, text) => {
             var bio = await Void.fetchStatus(citel.sender);
             var bioo = bio.status;
@@ -381,6 +403,8 @@ cmd({
             category: "group",
             filename: __filename,
         },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
         async(Void, citel, text) => {
             const userq = await Levels.fetch(citel.sender, "RandomXP");
             const lvpoints = userq.level;
@@ -462,6 +486,8 @@ cmd({
             category: "general",
             filename: __filename,
         },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
         async(Void, citel) => {
             const fetchlb = await Levels.fetchLeaderboard("RandomXP", 5);
             let leadtext = `
@@ -537,6 +563,8 @@ cmd({
             filename: __filename,
             use: '<quote|reply|number>',
         },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
         async(Void, citel, text) => {
             if (!citel.isGroup) return citel.reply(tlang().group);
             const groupAdmins = await getAdmin(Void, citel)
@@ -564,6 +592,8 @@ cmd({
             filename: __filename,
             use: '<quote|reply|number>',
         },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
         async(Void, citel, text) => {
             if (!citel.isGroup) return citel.reply(tlang().group);
             const groupAdmins = await getAdmin(Void, citel)
@@ -591,6 +621,8 @@ cmd({
             filename: __filename,
             use: '<text>',
         },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
         async(Void, citel, text) => {
             let mime = citel.quoted.mtype
             if (!/image/.test(mime)) return citel.reply(`Reply to Photo With Caption *text*`)
@@ -617,6 +649,8 @@ cmd({
             category: "group",
             filename: __filename,
         },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
         async(Void, citel, text) => {
             if (!citel.isGroup) return citel.reply(tlang().group);
             const groupAdmins = await getAdmin(Void, citel)
@@ -647,6 +681,8 @@ cmd({
             category: "group",
             filename: __filename,
         },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
         async(Void, citel, text) => {
             if (!citel.isGroup) return citel.reply(tlang().group);
             const groupAdmins = await getAdmin(Void, citel)
@@ -680,6 +716,8 @@ cmd({
             filename: __filename,
             use: '<text>',
         },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
         async(Void, citel, text) => {
             if (!citel.isGroup) return citel.reply(tlang().group);
             const groupMetadata = citel.isGroup ? await Void.groupMetadata(citel.chat).catch((e) => {}) : "";
@@ -706,6 +744,8 @@ cmd({
             filename: __filename,
             use: '<number>',
         },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
         async(Void, citel, text,{isCreator}) => {
             if (!citel.isGroup) return citel.reply(tlang().group);
             const groupAdmins = await getAdmin(Void, citel)
@@ -728,6 +768,8 @@ cmd({
             category: "group",
             filename: __filename,
         },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
         async(Void, citel, text,{ isCreator }) => {
             if (!isCreator) return citel.reply(tlang().owner)
             let getGroups = await Void.groupFetchAllParticipating();
@@ -757,6 +799,8 @@ cmd({
         filename: __filename,
         use: '<quote|reply|number>',
     },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
     async(Void, citel, text) => {
         if (!citel.isGroup) return citel.reply(tlang().group);
         const groupAdmins = await getAdmin(Void, citel)
@@ -786,6 +830,8 @@ cmd({
             filename: __filename,
             use: '<quote/reply message.>',
         },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
         async(Void, citel, text) => {
             if (citel.quoted.Bot) {
                 const key = {
@@ -825,6 +871,8 @@ cmd({
             filename: __filename,
             use: '<quoted/reply user.>',
         },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
         async(Void, citel, text) => {
             if (!citel.isGroup) return citel.reply('This command is only for Group.')
             if (!citel.quoted) return citel.reply('Quote a user master.')
@@ -851,6 +899,8 @@ cmd({
             filename: __filename,
             use: '<quote/reply user.>',
         },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
         async(Void, citel, text) => {
             if (!citel.quoted) return citel.reply("Please reply to user");
             if (!isCreator) citel.reply(tlang().owner);
@@ -871,6 +921,8 @@ cmd({
         filename: __filename,
         use: '<text for broadcast.>',
     },
+    async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
     async(Void, citel, text) => {
         if (!isCreator) return citel.reply(tlang().owner)
         let getGroups = await Void.groupFetchAllParticipating();
