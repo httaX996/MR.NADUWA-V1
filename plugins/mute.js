@@ -1,6 +1,7 @@
+
 const config = require('../config')
 const {cmd , commands} = require('../command')
-const isMute = mute.includes(m.chat) ? true : false
+
 cmd({
     pattern: "mute",
     desc: "group mute&unmute",
