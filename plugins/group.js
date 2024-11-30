@@ -654,10 +654,6 @@ try{
                 .then((res) => console.log(jsonformat(res)))
                 .catch((err) => console.log(jsonformat(err)));
 
-        }catch(e){
-console.log(e)
-reply(`${e}`)
-}
-})
+        }}
     
     
