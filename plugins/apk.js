@@ -30,7 +30,7 @@ try{
   } catch (e) {
     m.reply('*Terjadi error :* ' + e);
   }
-  break
+  
   
 case 'apk-detail':
   if (!text) return aiRep('*Masukkan link html*');
