@@ -76,7 +76,7 @@ ${imageUrl}`;
   } catch (e) {
     m.reply('*Terjadi error :* ' + e);
   }
-  break
+  
   
 case 'apk-dl':
   if (!text) return aiRep('*Masukkan link aplikasi yang ingin diunduh?*');
