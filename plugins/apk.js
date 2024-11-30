@@ -32,7 +32,7 @@ try{
   }
   
   
-case 'apk-detail':
+
   if (!text) return aiRep('*Masukkan link html*');
 
   try {
@@ -78,7 +78,7 @@ ${imageUrl}`;
   }
   
   
-case 'apk-dl':
+
   if (!text) return aiRep('*Masukkan link aplikasi yang ingin diunduh?*');
   
   try {
