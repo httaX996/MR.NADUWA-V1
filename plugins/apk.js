@@ -100,9 +100,5 @@ ${imageUrl}`;
   } catch (e) {
     m.reply('*Terjadi error :* ' + e);
   }
-catch(e){
-console.log(e)
-reply(`${e}`)
-}
-})
+
   
