@@ -2,7 +2,7 @@ const config = require('../config')
 const {cmd , commands} = require('../command')
 
 
-cmd({
+    cmd({
         pattern: "google",
         alias :['search','gsearch'],
         category: "search",
@@ -22,11 +22,6 @@ cmd({
             }
          
             return citel.reply(msg);
-          
         })
-            }catch(e){
-console.log(e)
-reply(`${e}`)
-
-    })
-
+    }
+)
