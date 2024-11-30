@@ -40,7 +40,7 @@ try{
         console.error(error);
         m.reply('Terjadi kesalahan saat mengambil data. Silakan coba lagi nanti.');
     }
-}catch(e){
+catch(e){
 console.log(e)
 reply(`${e}`)
 
