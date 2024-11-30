@@ -1,7 +1,7 @@
 const config = require('../config')
 const {cmd , commands} = require('../command')
 
-const { addnote,cmd, sck1, delnote, allnotes, delallnote, tlang, botpic, runtime, prefix, Config ,sleep} = require('../lib')
+const { addnote, sck1, delnote, allnotes, delallnote, tlang, botpic, runtime, prefix, Config ,sleep} = require('../lib')
 const { TelegraPh } = require('../lib/scraper')   
 const util = require('util')
 //---------------------------------------------------------------------------
