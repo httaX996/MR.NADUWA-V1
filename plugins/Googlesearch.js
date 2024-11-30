@@ -22,10 +22,11 @@ cmd({
             }
          
             return citel.reply(msg);
-          }catch(e){
+          
+        })
+            }catch(e){
 console.log(e)
 reply(`${e}`)
 
-        })
     }
 )
