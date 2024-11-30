@@ -39,12 +39,4 @@ try{
     } catch (error) {
         console.error(error);
         m.reply('Terjadi kesalahan saat mengambil data. Silakan coba lagi nanti.');
-    }}
-catch(e){
-console.log(e)
-reply(`${e}`)
-
-}
-
-})
-
+    }
