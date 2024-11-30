@@ -1,5 +1,5 @@
-
-import config from '../config.cjs';
+const config = require('../config')
+const {cmd , commands} = require('../command')
 
 const tagAll = async (m, gss) => {
   try {
