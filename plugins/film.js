@@ -1,7 +1,14 @@
 const config = require('../config')
 const {cmd , commands} = require('../command')
 
-
+cmd({
+    pattern: "film",
+    desc: "Check bot online or no.",
+    category: "main",
+    filename: __filename
+},
+async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
 
 case prefix + 'film':
     if (!text) return m.reply('Silakan masukkan nomor halaman (1-2239).');
@@ -10,11 +17,6 @@ case prefix + 'film':
     if (isNaN(page) || page < 1 || page > 2239) {
         return m.reply('Halaman harus antara 1 dan 2239.');
     }
-cmd({
-    pattern: "film",
-    desc: "download filme",
-    category: "download",
-    filename: __filename
     
     try {
         const response = await fetch(`https://endpoint.web.id/search/film?key=${global.key}&page=${page}`);
