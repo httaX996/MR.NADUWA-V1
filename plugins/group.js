@@ -633,9 +633,7 @@ try{
             }
             citel.reply(teskd)
         
-	}catch(e){
-console.log(e)
-reply(`${e}`)
+	}
 }
 })
 
