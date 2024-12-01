@@ -23,8 +23,7 @@ if (commands[i].pattern && !commands[i].dontAddCommandList) {
 menu[commands[i].category] += `.${commands[i].pattern}\n`;
  }
 }
-            case 'menu':
-            case 'allmenu':
+            
                 let madeMenu = `👋 Hello ${pushname}*
 
 *╭─「 ᴄᴏᴍᴍᴀɴᴅ ᴘᴀɴᴇʟ」*
