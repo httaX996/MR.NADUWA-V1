@@ -9,8 +9,8 @@ cmd({
 },
 async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
 try{
-let menu ={
-    main: '',
+let menu = {
+main: '',
 download: '',
 group: '',
 owner: '',
@@ -18,87 +18,48 @@ convert: '',
 search: ''
 };
 
-    for (let i = 0; i < commands.length; i++) {
+for (let i = 0; i < commands.length; i++) {
 if (commands[i].pattern && !commands[i].dontAddCommandList) {
 menu[commands[i].category] += `.${commands[i].pattern}\n`;
  }
 }
-            
-                let madeMenu = `👋 Hello ${pushname}*
 
-*╭─「 ᴄᴏᴍᴍᴀɴᴅ ᴘᴀɴᴇʟ」*
-*│◈ ʀᴜɴᴛɪᴍᴇ : ${runtime(process.uptime())}*
-*│◈ ʀᴀᴍ ᴜꜱᴀɢᴇ : ${Object.keys(used).map((key, _, arr) => `${key.padEnd(Math.max(...arr.map(v=>v.length)),' ')}: ${formatp(used[key])}`).join('\n')}*
-*│◈ ᴘʟᴀᴛꜰᴏʀᴍ : ${os.hostname()}*
-*│◈ ᴠᴇʀꜱɪᴏɴ : 1.0.0*
-*╰──────────●●►*
+let madeMenu = `
+📍▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬📍
+▮👋 *Hello ${pushname}*
+▮   
+▮ 📍 *DOWNLOAD COMMANDS* 📍
+▮
+▮${menu.download}
+▮
+▮📍 *MAIN COMMANDS* 📍
+▮
+▮${menu.main}
+▮
+▮ 📍 *GROUP COMMANDS* 📍
+▮
+▮${menu.group}
+▮
+▮ 📍 *OWNER COMMANDS* 📍
+▮
+▮${menu.owner}
+▮
+▮📍 *CONVERT COMMANDS* 📍
+▮
+▮${menu.convert}
+▮
+▮📍 *SEARCH COMMANDS* 📍
+▮
+▮${menu.search}
+▮
+▮✅ *_POWERD BY MR.NADUWA-V1_* ✅
+📍▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬📍
+` 
+await conn.sendMessage(from,{image:{url:"https://telegra.ph/file/69c6550dd74cc37760b73.jpg"},caption:madeMenu},{quoted:mek})
+  
 
-*╭╼╼╼╼╼╼╼╼╼╼*
-*├ 1 • OWNER*
-*├ 2 • CONVERT*
-*├ 3 • AI*
-*├ 4 • SEARCH*
-*├ 5 • DOWNLOAD*
-*├ 6 • MAIN*
-*├ 7 • GROUP*
-*├ 8 • FUN*
-*├ 9 • TOOLS*
-*├ 10 • OTHER*
-*╰╼╼╼╼╼╼╼╼╼╼*
-
-_*🌟 Reply with the Number you want to select*_
-
-> *©ᴘᴏᴡᴇʀᴇᴅ ʙʏ mr.naduwa🥷*`
-if (typemenu === 'v1') {
-                    mrsupunfernandosendMessage(m.chat, {
-                        text: supunmenuoh,
-                        contextInfo: {
-                            externalAdReply: {
-                                title: botname,
-                                body: ownername,
-                                thumbnailUrl: 'https://telegra.ph/file/69c6550dd74cc37760b73.jpg',
-                                sourceUrl: link,
-                                mediaType: 1,
-                                renderLargerThumbnail: true
-                            }
-                            }
-                        }, {
-                        quoted: m
-                    })
-                    } else if (typemenu === 'v2') {
-                    mrsupunfernandosendMessage(m.chat, {
-      video: fs.readFileSync('./supunMedia/thumb2.mp4'),
-      gifPlayback: true,
-      caption: supunmenuoh,
-      contextInfo: {
-      externalAdReply: {
-      title: botname,
-      body: ownername,
-      thumbnailUrl: 'https://i.ibb.co/J5QHpVg/20241011-084233.jpg',
-      sourceUrl: ``,
-      mediaType: 1,
-      renderLargerThumbnail: true
-      }
-      }
-      }, {
-                        quoted: m
-                    })
-                } else if (typemenu === 'v3') {
-                    mrsupunfernandosendMessage(m.chat, {
-                        video: fs.readFileSync('./supunMedia/thumb2.mp4'),
-                        caption: supunmenuoh,
-                        gifPlayback: true
-                    }, {
-                        quoted: m
-                    })
-                } else if (typemenu === 'v4') {
-                    mrsupunfernandorelayMessage(m.chat, {
-                        scheduledCallCreationMessage: {
-                           callType: "AUDIO",
-                           scheduledTimestampMs: 1200,
-                           title: supunmenuoh
-                        }
-                    }, {})
-                }
-                
-
+}catch(e){
+console.log(e)
+reply(`${e}`)
+}
+})
