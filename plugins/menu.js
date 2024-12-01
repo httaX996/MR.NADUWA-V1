@@ -99,6 +99,10 @@ if (typemenu === 'v1') {
                            title: supunmenuoh
                         }
                     }, {})
-                }
-                break
+                }catch(e){
+console.log(e)
+reply(`${e}`)
+}
+})
+                
 
