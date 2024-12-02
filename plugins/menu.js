@@ -2,12 +2,12 @@ const config = require('../config');
 const { cmd, commands } = require('../command');
 
 cmd({
-    pattern: "buttonmenu",
-    desc: "Get an advanced button-based menu of all commands",
+    pattern: "supermenu",
+    desc: "Get an advanced menu of all commands",
     category: "main",
     filename: __filename
 },
-async (conn, mek, m, { from, pushname, reply }) => {
+async (conn, mek, m, { from, quoted, pushname, reply }) => {
     try {
         let menu = {
             main: [],
@@ -24,7 +24,7 @@ async (conn, mek, m, { from, pushname, reply }) => {
             if (commands[i].pattern && !commands[i].dontAddCommandList) {
                 let cmdPattern = `.${commands[i].pattern}`;
                 let category = commands[i].category ? commands[i].category.toLowerCase() : 'others';
-
+                
                 if (menu[category]) {
                     menu[category].push(cmdPattern);
                 } else {
@@ -33,27 +33,32 @@ async (conn, mek, m, { from, pushname, reply }) => {
             }
         }
 
-        // Building button sections dynamically
-        let buttons = [];
+        // Building the menu text dynamically
+        let sections = [];
         for (let category in menu) {
             if (menu[category].length > 0) {
-                buttons.push({
-                    buttonId: `menu_${category}`,
-                    buttonText: { displayText: `${category.toUpperCase()} Commands` },
-                    type: 1
-                });
+                sections.push(`
+âœ… *${category.toUpperCase()} COMMANDS* âœ…
+${menu[category].join('\n')}
+                `.trim());
             }
         }
 
-        let message = {
-            text: `Hello ${pushname}!\n\nChoose a category to view commands.`,
-            footer: "Powered by MR.NADUWA-V2",
-            buttons: buttons,
-            headerType: 1 // Header type for a simple text header
-        };
+        let madeMenu = `
+ðŸ“â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬ðŸ“
+â–®ðŸ‘‹ *Hello ${pushname}*
+â–®   
+${sections.join('\n\n')}
+â–®   
+â–®âœ… *_POWERED BY MR.NADUWA-V2_* âœ…
+ðŸ“â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬ðŸ“
+        `;
 
-        // Sending the button-based menu
-        await conn.sendMessage(from, message, { quoted: mek });
+        // Sending the menu as a message with an image
+        await conn.sendMessage(from, {
+            image: { url: "https://telegra.ph/file/69c6550dd74cc37760b73.jpg" },
+            caption: madeMenu
+        }, { quoted: mek });
 
     } catch (e) {
         console.log(e);
