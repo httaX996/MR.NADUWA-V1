@@ -17,6 +17,7 @@ cmd(
       quoted,
       pushname,
       reply,
+      buttonResponseMessage,
     }
   ) => {
     try {
@@ -29,12 +30,14 @@ cmd(
         search: '',
       };
 
+      // Generate menu categories
       for (let i = 0; i < commands.length; i++) {
         if (commands[i].pattern && !commands[i].dontAddCommandList) {
           menu[commands[i].category] += `.${commands[i].pattern}\n`;
         }
       }
 
+      // Button menu structure
       let buttonMenu = {
         text: `👋 *Hello ${pushname}*\n\nSelect a category to see available commands:`,
         footer: "✅ Powered by MR.NADUWA-V1 ✅",
@@ -49,10 +52,13 @@ cmd(
         headerType: 1,
       };
 
+      // Send button menu
       await conn.sendMessage(from, buttonMenu, { quoted: mek });
 
-      conn.on('button-response', async (buttonResponse) => {
-        const { buttonId } = buttonResponse;
+      // Handle button responses
+      if (buttonResponseMessage) {
+        const buttonId = buttonResponseMessage.selectedButtonId;
+
         switch (buttonId) {
           case 'menu_download':
             reply(`📥 *Download Commands*\n\n${menu.download}`);
@@ -76,9 +82,9 @@ cmd(
             reply('Invalid button selection!');
             break;
         }
-      });
+      }
     } catch (e) {
-      console.log(e);
+      console.error(e);
       reply(`${e}`);
     }
   }
