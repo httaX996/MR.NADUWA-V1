@@ -45,13 +45,13 @@ ${menu[category].join('\n')}
         }
 
         let madeMenu = `
-ðŸ“â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬ðŸ“
-â–®ðŸ‘‹ *Hello ${pushname}*
-â–®   
-${sections.join('\n\n')}
-â–®   
-â–®âœ… *_POWERED BY MR.NADUWA-V2_* âœ…
-ðŸ“â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬â–¬ðŸ“
+▌▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+▌✅ *Hello ${pushname}*
+▌  
+▌${sections.join('\n\n')}
+▌  
+▌✅*_POWERED BY MR.NADUWA-V2_* ✅
+▌▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
         `;
 
         // Sending the menu as a message with an image
