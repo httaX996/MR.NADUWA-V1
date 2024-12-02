@@ -124,10 +124,8 @@ async(conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, quoted, reply }) => 
     } catch (e) {
         reply("Error setting profile picture.");
         console.log(e);
-    }catch (e) {
-        console.log(e);
-        reply("Error occurred.");
-}
+    }
+
 });
 
 
