@@ -4,7 +4,7 @@ const { cmd, commands } = require('../command');
 cmd(
   {
     pattern: "menu",
-    desc: "get cmd list",
+    desc: "Get command list",
     category: "main",
     filename: __filename,
   },
@@ -17,7 +17,6 @@ cmd(
       quoted,
       pushname,
       reply,
-      buttonResponseMessage,
     }
   ) => {
     try {
@@ -54,38 +53,53 @@ cmd(
 
       // Send button menu
       await conn.sendMessage(from, buttonMenu, { quoted: mek });
+    } catch (e) {
+      console.error(e);
+      reply(`${e}`);
+    }
+  }
+);
 
-      // Handle button responses
-      if (buttonResponseMessage) {
-        const buttonId = buttonResponseMessage.selectedButtonId;
+// Add a handler for button responses
+cmd(
+  {
+    pattern: '',
+    desc: 'Handle button responses',
+    category: 'system',
+    filename: __filename,
+  },
+  async (conn, mek, m) => {
+    try {
+      if (m.message?.buttonsResponseMessage?.selectedButtonId) {
+        const buttonId = m.message.buttonsResponseMessage.selectedButtonId;
 
+        // Route based on buttonId
         switch (buttonId) {
           case 'menu_download':
-            reply(`📥 *Download Commands*\n\n${menu.download}`);
+            await conn.sendMessage(m.key.remoteJid, { text: '📥 *Download Commands*\n\nAvailable commands:\n...' });
             break;
           case 'menu_main':
-            reply(`🏠 *Main Commands*\n\n${menu.main}`);
+            await conn.sendMessage(m.key.remoteJid, { text: '🏠 *Main Commands*\n\nAvailable commands:\n...' });
             break;
           case 'menu_group':
-            reply(`👥 *Group Commands*\n\n${menu.group}`);
+            await conn.sendMessage(m.key.remoteJid, { text: '👥 *Group Commands*\n\nAvailable commands:\n...' });
             break;
           case 'menu_owner':
-            reply(`👑 *Owner Commands*\n\n${menu.owner}`);
+            await conn.sendMessage(m.key.remoteJid, { text: '👑 *Owner Commands*\n\nAvailable commands:\n...' });
             break;
           case 'menu_convert':
-            reply(`🔄 *Convert Commands*\n\n${menu.convert}`);
+            await conn.sendMessage(m.key.remoteJid, { text: '🔄 *Convert Commands*\n\nAvailable commands:\n...' });
             break;
           case 'menu_search':
-            reply(`🔍 *Search Commands*\n\n${menu.search}`);
+            await conn.sendMessage(m.key.remoteJid, { text: '🔍 *Search Commands*\n\nAvailable commands:\n...' });
             break;
           default:
-            reply('Invalid button selection!');
+            await conn.sendMessage(m.key.remoteJid, { text: 'Invalid button selection!' });
             break;
         }
       }
     } catch (e) {
       console.error(e);
-      reply(`${e}`);
     }
   }
 );
