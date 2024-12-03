@@ -12,6 +12,6 @@ AUTO_READ_STATUS: process.env.AUTO_READ_STATUS || "true",
 MODE: process.env.MODE || "private",
 ALWAYS_ONLINE : process.env.ALWAYS_ONLINE || "false",
 AUTO_TYPING: process.env.AUTO_TYPING || "false",
- AUTO_RECORDING: process.env.AUTO_RECORDING || "true", 
+ AUTO_RECORDING: process.env.AUTO_RECORDING || "false", 
 
 };
