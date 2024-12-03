@@ -1,5 +1,5 @@
-const config = require('../config')
-const {cmd , commands} = require('../command')
+const config = require('../config');
+const { cmd, commands } = require('../command'); // Ensure `cmd` and `commands` are properly imported
 
 // Anti-Link Command
 cmd({
@@ -10,19 +10,16 @@ cmd({
     filename: __filename
 },
 async (conn, mek, m, { from, args, isGroup, isAdmins, reply }) => {
-    try {
-        if (!isGroup) return reply("This command can only be used in groups.");
-        if (!isAdmins) return reply("You need to be an admin to use this command.");
+    if (!isGroup) return reply("This command can only be used in groups.");
+    if (!isAdmins) return reply("You need to be an admin to use this command.");
 
-        let option = args[0]?.toLowerCase();
-        if (!option || (option !== "on" && option !== "off")) return reply("Usage: .antilink on/off");
-
-        // Set or unset anti-link for the group
-        reply(`Anti-Link has been turned ${option}.`);
-    } catch (e) {
-        console.log(e);
-        reply("Error occurred.");
+    let option = args[0]?.toLowerCase();
+    if (!option || (option !== "on" && option !== "off")) {
+        return reply("Usage: .antilink on/off");
     }
+
+    // Here you can integrate group settings logic (e.g., database or API to enable anti-link)
+    reply(`Anti-Link has been turned ${option}.`);
 });
 
 // Welcome Command
@@ -34,19 +31,16 @@ cmd({
     filename: __filename
 },
 async (conn, mek, m, { from, args, isGroup, isAdmins, reply }) => {
-    try {
-        if (!isGroup) return reply("This command can only be used in groups.");
-        if (!isAdmins) return reply("You need to be an admin to use this command.");
+    if (!isGroup) return reply("This command can only be used in groups.");
+    if (!isAdmins) return reply("You need to be an admin to use this command.");
 
-        let option = args[0]?.toLowerCase();
-        if (!option || (option !== "on" && option !== "off")) return reply("Usage: .welcome on/off");
-
-        // Enable or disable welcome messages
-        reply(`Welcome messages have been turned ${option}.`);
-    } catch (e) {
-        console.log(e);
-        reply("Error occurred.");
+    let option = args[0]?.toLowerCase();
+    if (!option || (option !== "on" && option !== "off")) {
+        return reply("Usage: .welcome on/off");
     }
+
+    // Integrate logic to manage welcome messages (e.g., update database)
+    reply(`Welcome messages have been turned ${option}.`);
 });
 
 // Kick Command
@@ -58,17 +52,16 @@ cmd({
     filename: __filename
 },
 async (conn, mek, m, { from, isGroup, isAdmins, reply, mentionedJid }) => {
+    if (!isGroup) return reply("This command can only be used in groups.");
+    if (!isAdmins) return reply("You need to be an admin to use this command.");
+    if (!mentionedJid?.[0]) return reply("Tag a user to kick.");
+
     try {
-        if (!isGroup) return reply("This command can only be used in groups.");
-        if (!isAdmins) return reply("You need to be an admin to use this command.");
-
-        if (!mentionedJid[0]) return reply("Tag a user to kick.");
-
         await conn.groupParticipantsUpdate(from, [mentionedJid[0]], "remove");
         reply("User has been removed.");
     } catch (e) {
-        console.log(e);
-        reply("Error occurred.");
+        console.error(e);
+        reply("Failed to remove the user. Ensure the bot has admin rights.");
     }
 });
 
@@ -81,19 +74,16 @@ cmd({
     filename: __filename
 },
 async (conn, mek, m, { from, args, isGroup, isAdmins, reply }) => {
-    try {
-        if (!isGroup) return reply("This command can only be used in groups.");
-        if (!isAdmins) return reply("You need to be an admin to use this command.");
+    if (!isGroup) return reply("This command can only be used in groups.");
+    if (!isAdmins) return reply("You need to be an admin to use this command.");
 
-        let option = args[0]?.toLowerCase();
-        if (!option || (option !== "on" && option !== "off")) return reply("Usage: .antispam on/off");
-
-        // Set or unset anti-spam for the group
-        reply(`Anti-Spam has been turned ${option}.`);
-    } catch (e) {
-        console.log(e);
-        reply("Error occurred.");
+    let option = args[0]?.toLowerCase();
+    if (!option || (option !== "on" && option !== "off")) {
+        return reply("Usage: .antispam on/off");
     }
+
+    // Logic to enable/disable anti-spam in group settings
+    reply(`Anti-Spam has been turned ${option}.`);
 });
 
 // Mute Group Command
@@ -105,15 +95,15 @@ cmd({
     filename: __filename
 },
 async (conn, mek, m, { from, isGroup, isAdmins, reply }) => {
-    try {
-        if (!isGroup) return reply("This command can only be used in groups.");
-        if (!isAdmins) return reply("You need to be an admin to use this command.");
+    if (!isGroup) return reply("This command can only be used in groups.");
+    if (!isAdmins) return reply("You need to be an admin to use this command.");
 
+    try {
         await conn.groupSettingUpdate(from, "announcement");
         reply("The group is now muted.");
     } catch (e) {
-        console.log(e);
-        reply("Error occurred.");
+        console.error(e);
+        reply("Failed to mute the group. Ensure the bot has admin rights.");
     }
 });
 
@@ -126,15 +116,15 @@ cmd({
     filename: __filename
 },
 async (conn, mek, m, { from, isGroup, isAdmins, reply }) => {
-    try {
-        if (!isGroup) return reply("This command can only be used in groups.");
-        if (!isAdmins) return reply("You need to be an admin to use this command.");
+    if (!isGroup) return reply("This command can only be used in groups.");
+    if (!isAdmins) return reply("You need to be an admin to use this command.");
 
+    try {
         await conn.groupSettingUpdate(from, "not_announcement");
         reply("The group is now unmuted.");
     } catch (e) {
-        console.log(e);
-        reply("Error occurred.");
+        console.error(e);
+        reply("Failed to unmute the group. Ensure the bot has admin rights.");
     }
 });
 
@@ -147,16 +137,10 @@ cmd({
     filename: __filename
 },
 async (conn, mek, m, { from, mentionedJid, reply, isGroup, isAdmins }) => {
-    try {
-        if (!isGroup) return reply("This command can only be used in groups.");
-        if (!isAdmins) return reply("You need to be an admin to use this command.");
+    if (!isGroup) return reply("This command can only be used in groups.");
+    if (!isAdmins) return reply("You need to be an admin to use this command.");
+    if (!mentionedJid?.[0]) return reply("Tag a user to warn.");
 
-        if (!mentionedJid[0]) return reply("Tag a user to warn.");
-
-        // Implement warning logic (e.g., keeping track of warnings in a database)
-        reply(`User has been warned.`);
-    } catch (e) {
-        console.log(e);
-        reply("Error occurred.");
-    }
+    // Implement your warning logic (e.g., using a database)
+    reply(`User has been warned.`);
 });
