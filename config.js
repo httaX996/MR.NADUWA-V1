@@ -13,6 +13,6 @@ MODE: process.env.MODE || "private",
 ALWAYS_ONLINE : process.env.ALWAYS_ONLINE || "false",
 AUTO_TYPING: process.env.AUTO_TYPING || "false",
  AUTO_RECORDING: process.env.AUTO_RECORDING || "false", 
- MONGODB: process.env.MONGODB || "mongodb+srv://naduwa:nadun@2004@cluster0.lzm2r.mongodb.net/",   
+ MONGODB: process.env.MONGODB || "mongodb://mongo:kCsRNNRXjzqeTLyqgEQrdIowAxYZCgrB@junction.proxy.rlwy.net:19550"
 
 };
