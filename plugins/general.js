@@ -1,12 +1,15 @@
 const config = require('../config');
-const { cmd, commands } = require('../command');
+const { commands } = require('../command'); // Removed `cmd` from this import
 
-const { sck, sck1,cmd, jsonformat, botpic, TelegraPh, RandomXP, Config, tlang, warndb, sleep,getAdmin,getBuffer, prefix } = require('../lib')
+const {
+    sck, sck1, jsonformat, botpic, TelegraPh, RandomXP, Config,
+    tlang, warndb, sleep, getAdmin, getBuffer, prefix, cmd // Kept `cmd` here
+} = require('../lib');
 const moment = require("moment-timezone");
-const fs = require('fs-extra')
+const fs = require('fs-extra');
 const Levels = require("discord-xp");
 const { Sticker, createSticker, StickerTypes } = require("wa-sticker-formatter");
-//---------------------------------------------------------------------------
+//--------------------------------------------------------------------
 cmd({
             pattern: "join",
             desc: "joins group by link",
