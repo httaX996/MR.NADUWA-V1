@@ -18,7 +18,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
 *╭─「 𝙼𝚁.𝙽𝙰𝙳𝚄𝚆𝙰-𝚅2 」*
 *│◈ ʀᴜɴᴛɪᴍᴇ : ${runtime(process.uptime())}*
 *│◈ ʀᴀᴍ ᴜꜱᴀɢᴇ : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB*
-*│◈ ᴘʟᴀᴛꜰᴏʀᴍ :  ${getPlatform()}*
+*│◈ ᴘʟᴀᴛꜰᴏʀᴍ :   ${os.hostname()}**
 *│◈ ᴠᴇʀꜱɪᴏɴ : 2.0.0*
 *╰──────────●●►*
 
@@ -37,7 +37,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
 *├ 11 • NEWS*
 *╰╼╼╼╼╼╼╼╼╼╼*
 
-_*🌟 Reply with the Number you want to select*_
+_*🥷 Reply with the Number you want to select*_
 
 > *𝙋𝙊𝙒𝙀𝙍𝘿 𝘽𝙔 𝙈𝙍.𝙉𝘼𝘿𝙐𝙒𝘼*`;
 
