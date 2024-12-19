@@ -1,10 +1,8 @@
 
-const { sck, sck1,cmd, jsonformat, botpic, TelegraPh, RandomXP, Config, tlang, warndb, sleep,getAdmin,getBuffer, prefix } = require('../lib')
-const moment = require("moment-timezone");
-const fs = require('fs-extra')
-const Levels = require("discord-xp");
-const { Sticker, createSticker, StickerTypes } = require("wa-sticker-formatter");
-//---------------------------------------------------------------------------
+const config = require('../config');
+const { cmd, commands } = require('../command');
+const { default: makeWASocket, useMultiFileAuthState, WA_DEFAULT_EPHEMERAL, jidNormalizedUser, proto, getDevice, generateWAMessageFromContent, fetchLatestBaileysVersion, makeInMemoryStore, getContentType, generateForwardMessageContent, downloadContentFromMessage, jidDecode } = require('@whiskeysockets/baileys')
+//------------------------------------------------------------------
 cmd({
             pattern: "join",
             desc: "joins group by link",
