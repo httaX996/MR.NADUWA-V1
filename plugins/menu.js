@@ -41,7 +41,7 @@ _*🥷 Reply with the Number you want to select*_
 
 > *𝙋𝙊𝙒𝙀𝙍𝘿 𝘽𝙔 𝙈𝙍.𝙉𝘼𝘿𝙐𝙒𝘼*`;
 
-        const vv = await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/3f7249eb429c8211cbba3.jpg"}, caption: desc }, { quoted: mek });
+        const vv = await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/6fea4e5e00bc0d9395f15.jpg"}, caption: desc }, { quoted: mek });
 
         conn.ev.on('messages.upsert', async (msgUpdate) => {
             const msg = msgUpdate.messages[0];
