@@ -8,12 +8,12 @@ cmd({
     pattern: "menu",
     alias: ["list"],
     desc: "menu the bot",
-    react: "📜",
+    react: "✅",
     category: "main"
 },
 async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
     try {
-        let desc = `*👋 Hello ${pushname}*
+        let desc = `*🧞 Hello ${pushname}*
 
 *╭─「 𝙼𝚁.𝙽𝙰𝙳𝚄𝚆𝙰-𝚅2 」*
 *│◈ ʀᴜɴᴛɪᴍᴇ : ${runtime(process.uptime())}*
@@ -37,9 +37,9 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
 *├ 11 • NEWS*
 *╰╼╼╼╼╼╼╼╼╼╼*
 
-_*🌟 Reply with the Number you want to select*_
+_*🥷 Reply with the Number you want to select*_
 
-> *𝙋𝙊𝙒𝙀𝙍𝘿 𝘽𝙔 𝘼𝙉𝙄𝙇𝘼 𝙇𝙊𝘾𝙃𝘼𝙉𝘼*`;
+> *𝙋𝙊𝙒𝙀𝙍𝘿 𝘽𝙔 𝙈𝙍.𝙉𝘼𝘿𝙐𝙒𝘼*`;
 
         const vv = await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/3f7249eb429c8211cbba3.jpg"}, caption: desc }, { quoted: mek });
 
