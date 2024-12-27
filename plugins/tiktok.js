@@ -3,7 +3,7 @@
 const { cmd } = require('../command')
 const { fetchJson } = require('../lib/functions')
 
-const apilink = 'https://www.dark-yasiya-api.site' // API LINK ( DO NOT CHANGE THIS!! )
+const apilink = 'https://pikabotzapi.vercel.app/?apikey=anya-md' // API LINK ( DO NOT CHANGE THIS!! )
 
 
 cmd({
