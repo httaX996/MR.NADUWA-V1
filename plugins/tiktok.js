@@ -1,72 +1,131 @@
-const { cmd } = require('../command'); // Command handler
-const axios = require('axios'); // Ensure axios is installed: npm install axios
 
-const apiBaseURL = 'https://api.davidcyriltech.my.id';
+const { fetchJson } = require('../lib/functions')
+const config = require('../config')
+const { cmd, commands } = require('../command')
 
+// FETCH API URL
+let baseUrl;
+(async () => {
+    let baseUrlGet = await fetchJson(`https://api.davidcyriltech.my.id`)
+    baseUrl = baseUrlGet.api
+})();
+
+
+const yourName = "*MR.NADUWA-V1*"; 
+
+
+
+//fb downloader
+cmd({
+    pattern: "fb",
+    alias: ["facebook"],
+    desc: "download fb videos",
+    category: "download",
+    filename: __filename
+},
+async(conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+    try {
+        if (!q && !q.startsWith("https://")) return reply("give me fb url")
+        //fetch data from api  
+        let data = await fetchJson(`${baseUrl}/api/fdown?url=${q}`)
+        reply("*Downloading...*")
+        //send video (hd,sd)
+        await conn.sendMessage(from, { video: { url: data.data.hd }, mimetype: "video/mp4", caption: `- HD\n\n ${yourName}` }, { quoted: mek })
+        await conn.sendMessage(from, { video: { url: data.data.sd }, mimetype: "video/mp4", caption: `- SD \n\n ${yourName}` }, { quoted: mek })  
+    } catch (e) {
+        console.log(e)
+        reply(`${e}`)
+    }
+})
+
+//tiktok downloader
 cmd({
     pattern: "tiktok",
-    alias: ["tt", "ttdown"],
-    desc: "Download TikTok videos with or without watermark and audio",
+    alias: ["tt"],
+    desc: "download tt videos",
     category: "download",
-    use: ".tiktok <url>",
     filename: __filename
-}, async (conn, mek, m, { from, quoted, reply, q }) => {
+},
+async(conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
     try {
-        // Validate input
-        if (!q) return await reply("❌ Please provide a TikTok URL.");
-        if (!q.includes('tiktok.com')) return await reply("❌ Invalid URL! Please provide a valid TikTok link.");
-
-        // Fetch TikTok data from API
-        const { data } = await axios.get(`${apiBaseURL}?url=${q}`);
-        
-        // Handle API errors
-        if (data.status !== "success" || !data.result) {
-            return await reply("❌ Failed to retrieve TikTok video. Please try again later.");
-        }
-
-        const { title, author, duration, views, cover, wm_video, no_wm_video, audio } = data.result;
-
-        // Prepare details message
-        const detailsMessage = `
-*TIKTOK VIDEO DOWNLOADER*
-
-• *Title*: ${title || 'N/A'}
-• *Author*: ${author || 'N/A'}
-• *Duration*: ${duration || 'N/A'}
-• *Views*: ${views || 'N/A'}
-        `;
-
-        // Send video details and thumbnail
-        await conn.sendMessage(from, { image: { url: cover || '' }, caption: detailsMessage }, { quoted: mek });
-
-        // Send watermark video
-        if (wm_video) {
-            await conn.sendMessage(from, {
-                video: { url: wm_video },
-                mimetype: "video/mp4",
-                caption: `${title || 'TikTok Video'}\n\n*WATERMARK VIDEO ✅*`
-            }, { quoted: mek });
-        }
-
-        // Send no-watermark video
-        if (no_wm_video) {
-            await conn.sendMessage(from, {
-                video: { url: no_wm_video },
-                mimetype: "video/mp4",
-                caption: `${title || 'TikTok Video'}\n\n*NO WATERMARK VIDEO ✅*`
-            }, { quoted: mek });
-        }
-
-        // Send audio
-        if (audio) {
-            await conn.sendMessage(from, {
-                audio: { url: audio },
-                mimetype: "audio/mpeg",
-                ptt: false // Set to true if you want to send it as a voice note
-            }, { quoted: mek });
-        }
-    } catch (error) {
-        console.error("Error occurred:", error.message);
-        await reply("❌ An error occurred while processing your request. Please try again later.");
+        if (!q && !q.startsWith("https://")) return reply("give me tiktok url")
+        //fetch data from api  
+        let data = await fetchJson(`${baseUrl}/api/tiktokdl?url=${q}`)
+        reply("*Downloading...*")
+        //send video (wm,nwm)
+        await conn.sendMessage(from, { video: { url: data.data.no_wm }, mimetype: "video/mp4", caption: `- NO-WATERMARK\n\n ${yourName}` }, { quoted: mek })
+        await conn.sendMessage(from, { video: { url: data.data.wm }, mimetype: "video/mp4", caption: `- WITH-WATERMARK \n\n ${yourName}` }, { quoted: mek })  
+        //send audio    
+        await conn.sendMessage(from, { audio: { url: data.data.audio }, mimetype: "audio/mpeg" }, { quoted: mek })  
+    } catch (e) {
+        console.log(e)
+        reply(`${e}`)
     }
-});
+})
+
+//twitter dl (x)
+cmd({
+    pattern: "twitter",
+    alias: ["twdl"],
+    desc: "download tw videos",
+    category: "download",
+    filename: __filename
+},
+async(conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+    try {
+        if (!q && !q.startsWith("https://")) return reply("give me twitter url")
+        //fetch data from api  
+        let data = await fetchJson(`${baseUrl}/api/twitterdl?url=${q}`)
+        reply("*Downloading...*")
+        //send video (hd,sd)
+        await conn.sendMessage(from, { video: { url: data.data.data.HD }, mimetype: "video/mp4", caption: `- HD\n\n ${yourName}` }, { quoted: mek })
+        await conn.sendMessage(from, { video: { url: data.data.data.SD }, mimetype: "video/mp4", caption: `- SD \n\n ${yourName}` }, { quoted: mek })  
+        //send audio    
+        await conn.sendMessage(from, { audio: { url: data.data.data.audio }, mimetype: "audio/mpeg" }, { quoted: mek })  
+    } catch (e) {
+        console.log(e)
+        reply(`${e}`)
+    }
+})
+
+//gdrive(google drive) dl
+cmd({
+    pattern: "gdrive",
+    alias: ["googledrive"],
+    desc: "download gdrive files",
+    category: "download",
+    filename: __filename
+},
+async(conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+    try {
+        if (!q && !q.startsWith("https://")) return reply("give me gdrive url")
+        //fetch data from api  
+        let data = await fetchJson(`${baseUrl}/api/gdrivedl?url=${q}`)
+        reply("*Downloading...*")
+        await conn.sendMessage(from, { document: { url: data.data.download }, fileName: data.data.fileName, mimetype: data.data.mimeType, caption: `${data.data.fileName}\n\n${yourName}` }, { quoted: mek })                                                                                                                 
+    } catch (e) {
+        console.log(e)
+        reply(`${e}`)
+    }
+})
+
+//mediafire dl
+cmd({
+    pattern: "mediafire",
+    alias: ["mfire"],
+    desc: "download mfire files",
+    category: "download",
+    filename: __filename
+},
+async(conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+    try {
+        if (!q && !q.startsWith("https://")) return reply("give me mediafire url")
+        //fetch data from api  
+        let data = await fetchJson(`${baseUrl}/api/mediafiredl?url=${q}`)
+        reply("*Downloading...*")
+        await conn.sendMessage(from, { document: { url: data.data.link_1 }, fileName: data.data.name, mimetype: data.data.file_type, caption: `${data.data.name}\n\n${yourName}` }, { quoted: mek })                                                                                                                 
+    } catch (e) {
+        console.log(e)
+        reply(`${e}`)
+    }
+})
