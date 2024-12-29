@@ -3,7 +3,7 @@
 const { cmd } = require('../command')
 const { fetchJson } = require('../lib/functions')
 
-const apilink = 'https://saviya-kolla-api.koyeb.app/download/tiktok?url=https://vm.tiktok.com/ZS6MPqLR8/' // API LINK ( DO NOT CHANGE THIS!! )
+const apilink = 'https://api.davidcyriltech.my.id/download/tiktok?url=' // API LINK ( DO NOT CHANGE THIS!! )
 
 
 cmd({
@@ -46,7 +46,7 @@ await conn.sendMessage(from, { video: { url: tiktok.result.wmVideo }, mimetype: 
 await conn.sendMessage(from, { video: { url: tiktok.result.hdVideo }, mimetype: "video/mp4", caption: `${tiktok.result.title}\n\nNO-WATERMARK VIDEO ✅` }, { quoted: mek });
   
 // SEND AUDIO
-await conn.sendMessage(from, { audio: { url: tiktok.result.sound }, mimetype: "audio/mpeg" }, { quoted: mek });
+
 
   
 } catch (e) {
