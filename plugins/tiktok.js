@@ -1,58 +1,78 @@
-// TIKTOK DOWNLOAD COMMAND
+const { cmd } = require('../command'); // Adjust this based on your project structure
+const { fetchJson } = require('../lib/functions'); // Utility for making API requests
 
-const { cmd } = require('../command')
-const { fetchJson } = require('../lib/functions')
-
-const apilink = 'https://api.davidcyriltech.my.id/download/tiktok?url=' // API LINK ( DO NOT CHANGE THIS!! )
-
+// Replace this with your actual API URL
+const apilink = 'https://api.davidcyriltech.my.id/download/tiktok?url=';
 
 cmd({
     pattern: "tiktok",
-    alias: ["tt","ttdown"],
+    alias: ["tt", "ttdown"],
     react: "",
-    desc: "",
+    desc: "Download TikTok videos with or without watermark and audio",
     category: "download",
-    use: '.tiktok < url >',
+    use: '.tiktok <url>',
     filename: __filename
-},
-async(conn, mek, m,{from, quoted, reply, q }) => {
-try{
-  
-if(!q) return await reply("Please give me tiktok url");
-  if(!q.includes('tiktok.com')) return await reply("This url is invalid");
-  
-const tiktok = await fetchJson(`${apilink}/download/tiktok?url=${q}`);
-  
-const msg = `
-            *TIKTOK DOWNLOADER* 
+}, async (conn, mek, m, { from, quoted, reply, q }) => {
+    try {
+        // Check if URL is provided
+        if (!q) {
+            return await reply("❌ Please provide a TikTok video URL.");
+        }
 
+        // Validate TikTok URL
+        if (!q.includes('tiktok.com')) {
+            return await reply("❌ Invalid URL! Please provide a valid TikTok link.");
+        }
 
-• *Title* - ${tiktok.result.title}
+        // Fetch video details from the API
+        const tiktokData = await fetchJson(`${apilink}/download/tiktok?url=${q}`);
+        if (!tiktokData || !tiktokData.result) {
+            return await reply("❌ Failed to retrieve TikTok video. Please try again later.");
+        }
 
-• *Author* - ${tiktok.result.author}
+        const { title, author, duration, views, cover, wmVideo, hdVideo, sound } = tiktokData.result;
 
-• *Duration* - ${tiktok.result.duration}
+        // Prepare details message
+        const detailsMessage = `
+*TIKTOK VIDEO DOWNLOADER*
 
-• *Views* - ${tiktok.result.views}   
-`
-  
-// SEND DETAILS
-await conn.sendMessage( from, { image: { url: tiktok.result.cover || '' }, caption: msg }, { quoted: mek });
+• *Title*: ${title || 'N/A'}
+• *Author*: ${author || 'N/A'}
+• *Duration*: ${duration || 'N/A'}
+• *Views*: ${views || 'N/A'}
+        `;
 
-// SEND WATER MARK VIDEO
-await conn.sendMessage(from, { video: { url: tiktok.result.wmVideo }, mimetype: "video/mp4", caption: `${tiktok.result.title}\n\nWATERMARK VIDEO ✅` }, { quoted: mek });
-  
-// SEND HD VIDEO
-await conn.sendMessage(from, { video: { url: tiktok.result.hdVideo }, mimetype: "video/mp4", caption: `${tiktok.result.title}\n\nNO-WATERMARK VIDEO ✅` }, { quoted: mek });
-  
-// SEND AUDIO
+        // Send video details and thumbnail
+        await conn.sendMessage(from, { image: { url: cover || '' }, caption: detailsMessage }, { quoted: mek });
 
+        // Send watermark video
+        if (wmVideo) {
+            await conn.sendMessage(from, {
+                video: { url: wmVideo },
+                mimetype: "video/mp4",
+                caption: `${title || 'TikTok Video'}\n\n*WATERMARK VIDEO ✅*`
+            }, { quoted: mek });
+        }
 
-  
-} catch (e) {
-console.log(e)
-reply(e)
-}
-})
+        // Send HD (no watermark) video
+        if (hdVideo) {
+            await conn.sendMessage(from, {
+                video: { url: hdVideo },
+                mimetype: "video/mp4",
+                caption: `${title || 'TikTok Video'}\n\n*NO WATERMARK VIDEO ✅*`
+            }, { quoted: mek });
+        }
 
-// 
+        // Send audio
+        if (sound) {
+            await conn.sendMessage(from, {
+                audio: { url: sound },
+                mimetype: "audio/mpeg",
+                ptt: false // Set true if you want it as a voice note
+            }, { quoted: mek });
+        }
+    } catch (error) {
+        console.error(error);
+        await reply("❌ An error occurred while processing your request. Please try again later.");
+    }
+});
