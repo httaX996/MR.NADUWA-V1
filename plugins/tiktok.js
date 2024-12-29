@@ -1,7 +1,7 @@
 const { cmd } = require('../command'); // Command handler
 const axios = require('axios'); // Ensure axios is installed: npm install axios
 
-const apiBaseURL = 'https://api.davidcyriltech.my.id/download/tiktok';
+const apiBaseURL = 'https://api.davidcyriltech.my.id';
 
 cmd({
     pattern: "tiktok",
