@@ -4,100 +4,125 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
-// Audio Downloader
 cmd({
-    pattern: "audio",
-    alias: ["audiodl", "audiodown"],
-    react: "🎧",
-    desc: "Download audio from a YouTube link",
+    pattern: "song",
+    desc: "download songs",
     category: "download",
-    use: '.audio <link>',
     filename: __filename
 },
-async (conn, mek, m, { from, quoted, reply, q }) => {
-    try {
-        if (!q) return await reply("Please provide a YouTube video link!");
-        
-        if (!ytdl.validateURL(q)) return await reply("Invalid YouTube link!");
+async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
+if(!q) return reply("please give me url or title")
+const search = await yts(q)
+const data = search.videos[0];
+const url = data.url
 
-        const info = await ytdl.getInfo(q);
-        const audioFormat = ytdl.chooseFormat(info.formats, { quality: 'highestaudio' });
-        
-        const msg = `
-🎧 *AUDIO DOWNLOADER* 🎧
+let desc = `
+✅MR.NADUWA-V1 SONG DOWNLOADER✅
 
-*Title* - ${info.videoDetails.title}
-*Duration* - ${Math.floor(info.videoDetails.lengthSeconds / 60)}:${info.videoDetails.lengthSeconds % 60} minutes
 
-`;
+▬▬▬▬▬▬▬▬▬▬▬▬◆
+▋➥ *title*: ${data.title}
+▋➥ *description*: ${data.description}
+▌➥ *time*: ${data.timestamp}
+▋➥ *ago*: ${data.ago}
+▌➥ *views*: ${data.views}
+▋➥ *ago*: ${data.ago}
+▋➥ *Author*:${data.Author}
+▬▬▬▬▬▬▬▬▬▬▬▬◆
 
-        // Send details
-        await conn.sendMessage(from, { text: msg }, { quoted: mek });
 
-        // Stream and send audio
-        const audioStream = ytdl(q, { filter: 'audioonly' });
-        const filename = `${info.videoDetails.title}.mp3`;
-        const filePath = path.join(__dirname, filename);
 
-        // Save and send audio
-        const writeStream = fs.createWriteStream(filePath);
-        audioStream.pipe(writeStream);
 
-        writeStream.on('finish', async () => {
-            await conn.sendMessage(from, { audio: fs.createReadStream(filePath), mimetype: 'audio/mpeg' }, { quoted: mek });
-            fs.unlinkSync(filePath); // Clean up file
-        });
-    } catch (error) {
-        console.error("Error in audio downloader:", error);
-        await reply("An error occurred while fetching the audio. Please try again later.");
-    }
-});
+use prefix {.}  example {.song new rap,video new rap}
 
-// Video Downloader
+
+
+
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+▋ *_POWER BY MR.NADUWA_*  ▌
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+
+
+`
+
+await conn.sendMessage(from,{image:{url: data.thumbnail},caption:desc},{quoted:mek});
+//download audio
+
+let down = await fg.yta(url)
+let downloadUrl = down.dl_url
+
+
+//send audio+ document  message
+await conn.sendMessage(from,{audio: {url:downloadUrl},mimetype:"audio/mpeg"},{quoted:mek})
+await conn.sendMessage(from,{document : {url:downloadUrl},mimetype:"audio/mpeg",filName:data.title + ".mp3",caption:"✅MADE BY MR.NADUWA-V1✅"},{quoted:mek})
+
+  
+}catch(e){
+console.log(e)
+reply(`${e}`)
+}
+})
+
+
+
+//=============video-dl===============
+
 cmd({
     pattern: "video",
-    alias: ["viddl", "viddown"],
-    react: "🎥",
-    desc: "Download video from YouTube link",
+    desc: "download videos",
     category: "download",
-    use: '.video <link>',
     filename: __filename
 },
-async (conn, mek, m, { from, quoted, reply, q }) => {
-    try {
-        if (!q) return await reply("Please provide a YouTube video link!");
-        
-        if (!ytdl.validateURL(q)) return await reply("Invalid YouTube link!");
+async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
+if(!q) return reply("please give me url or title")
+const search = await yts(q)
+const data = search.videos[0];
+const url = data.url
 
-        const info = await ytdl.getInfo(q);
-        const videoFormat = ytdl.chooseFormat(info.formats, { quality: 'highestvideo' });
+let desc = `
+✅MR.NADUWA-V1 VIDEO DOWNLOADER✅
 
-        const msg = `
-🎥 *VIDEO DOWNLOADER* 🎥
 
-*Title* - ${info.videoDetails.title}
-*Duration* - ${Math.floor(info.videoDetails.lengthSeconds / 60)}:${info.videoDetails.lengthSeconds % 60} minutes
+▬▬▬▬▬▬▬▬▬▬▬▬◆
+▋➥ *title*: ${data.title}
+▋➥ *description*: ${data.description}
+▌➥ *time*: ${data.timestamp}
+▋➥ *ago*: ${data.ago}
+▌➥ *views*: ${data.views}
+▋➥ *ago*: ${data.ago}
+▋➥ *Author*:${data.Author}
+▬▬▬▬▬▬▬▬▬▬▬▬◆
 
-`;
 
-        // Send details
-        await conn.sendMessage(from, { text: msg }, { quoted: mek });
 
-        // Stream and send video
-        const videoStream = ytdl(q, { format: videoFormat });
-        const filename = `${info.videoDetails.title}.mp4`;
-        const filePath = path.join(__dirname, filename);
 
-        // Save and send video
-        const writeStream = fs.createWriteStream(filePath);
-        videoStream.pipe(writeStream);
+use prefix {.}  example {.song new rap,video new rap}
 
-        writeStream.on('finish', async () => {
-            await conn.sendMessage(from, { video: fs.createReadStream(filePath), mimetype: 'video/mp4' }, { quoted: mek });
-            fs.unlinkSync(filePath); // Clean up file
-        });
-    } catch (error) {
-        console.error("Error in video downloader:", error);
-        await reply("An error occurred while fetching the video. Please try again later.");
-    }
-});
+
+
+
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+▋ *_POWER BY MR.NADUWA_*  ▌
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+
+`
+
+await conn.sendMessage(from,{image:{url: data.thumbnail},caption:desc},{quoted:mek});
+//download video
+
+let down = await fg.ytv(url)
+let downloadUrl = down.dl_url
+
+
+//send video+ document message
+await conn.sendMessage(from,{video: {url:downloadUrl},mimetype:"video/mp4"},{quoted:mek})
+await conn.sendMessage(from,{document : {url:downloadUrl},mimetype:"video/mp4",filName:data.title + ".mp4",caption:"✅MADE BY MR.NADUWA-V1"},{quoted:mek})
+
+  
+}catch(e){
+console.log(e)
+reply(`${e}`)
+}
+})
