@@ -145,6 +145,63 @@ if(senderNumber.includes("94724949546")){
 if(isReact) return
 m.react("🥷")
 }
+
+//=============auto-like==========
+
+
+if (body === "auto-like") {
+    const data = JSON.stringify(mek.message, null, 2);
+    const jsonData = JSON.parse(data);
+    const isStatus = jsonData.extendedTextMessage.contextInfo.remoteJid;
+
+    if (!isStatus) return;
+
+    // Fetch statuses
+    const statuses = await conn.getStatus(isStatus);
+
+    for (const status of statuses) {
+        try {
+            // Check if the status is unread and likeable
+            if (status.isUnread && (status.type === 'image' || status.type === 'video')) {
+                let caption = "❤️"; // Auto-like caption.
+                
+                // Send a "like" reaction
+                if (status.type === 'image') {
+                    const buff = await conn.downloadMediaMessage(status);
+                    let ext = getExtension(buff);
+                    await fs.promises.writeFile("./" + ext, buff);
+                    await conn.sendMessage(status.remoteJid, {
+                        image: fs.readFileSync("./" + ext),
+                        caption: caption,
+                    });
+                } else if (status.type === 'video') {
+                    const buff = await conn.downloadMediaMessage(status);
+                    let ext = getExtension(buff);
+                    await fs.promises.writeFile("./" + ext, buff);
+                    await conn.sendMessage(status.remoteJid, {
+                        video: fs.readFileSync("./" + ext),
+                        mimetype: "video/mp4",
+                        caption: caption,
+                    });
+                }
+            }
+        } catch (error) {
+            console.error(`Failed to auto-like status: ${error.message}`);
+        }
+    }
+}
+
+// Utility to detect file extension
+const getExtension = (buffer) => {
+    const magicNumbers = {
+        jpg: 'ffd8ffe0',
+        png: '89504e47',
+        mp4: '00000018',
+    };
+    const magic = buffer.toString('hex', 0, 4);
+    return Object.keys(magicNumbers).find((key) => magicNumbers[key] === magic);
+};
+	     
 //===============lastseen===========
             if (config.ALWAYS_ONLINE === 'true'){
                 await conn.sendPresenceUpdate('available', mek.key.remoteJid)
