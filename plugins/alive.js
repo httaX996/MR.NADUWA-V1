@@ -19,9 +19,9 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
 
 > Don't forget to frok the repo ⤵️
 
-https://github.com/JawadYTX/KHAN-AI`;
+https://github.com/mrnaduwav4/MR.NADUWA-V1.git`;
 
-        await conn.sendMessage(from, { image: { url: `https://files.catbox.moe/x3bdmi.jpg` }, caption: dec, contextInfo: { mentionedJid: [m.sender], forwardingScore: 999, isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: '', newsletterName: 'JawadTechX', serverMessageId: 143 } } }, { quoted: mek });
+        await conn.sendMessage(from, { image: { url: `https://telegra.ph/file/6fea4e5e00bc0d9395f15.jpg` }, caption: dec, contextInfo: { mentionedJid: [m.sender], forwardingScore: 999, isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: '', newsletterName: 'JawadTechX', serverMessageId: 143 } } }, { quoted: mek });
 
         // Send audio
         await conn.sendMessage(from, {
