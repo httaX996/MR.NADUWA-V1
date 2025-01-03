@@ -5,10 +5,10 @@ const {cmd , commands} = require('../command')
 const os = require("os")
 const {runtime} = require('../lib/functions')
 cmd({
-    pattern: "menu",
+    pattern: "panel",
     alias: ["list"],
     desc: "menu the bot",
-    react: "📜",
+    react: "🥀",
     category: "main"
 },
 async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
@@ -363,9 +363,9 @@ _*🌟 Reply with the Number you want to select*_
 //==================== all menu command =====================
 
 cmd({
-    pattern: "allmenu",
+    pattern: "panel2",
     desc: "To get the menu.",
-    react: "📜",
+    react: "😅",
     category: "main",
     filename: __filename
 },
@@ -399,7 +399,7 @@ let madeMenu = `
 
       👋 𝐇𝐄𝐋𝐋𝐎, ${pushname}!
 
-✨ 𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝘁𝗼 𝙈𝙍.𝙉𝘼𝘿𝙐𝙒𝘼-𝙑2! ✨ 
+✨ 𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝘁𝗼 𝙈𝙍.𝙉𝘼𝘿𝙐𝙒𝘼-𝙑1! ✨ 
 
 ╭─「 ᴄᴏᴍᴍᴀɴᴅꜱ ᴘᴀɴᴇʟ 」
 │◈ 𝐑𝐔𝐍 𝐓𝐈𝐌𝐄 * ${runtime(process.uptime())}
