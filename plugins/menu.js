@@ -111,9 +111,8 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
  ${menu.news}
 ╰───────────●●►
     `;
-        await conn.sendMessage(from, { text: madeMenu }, { quoted: mek });
-    } catch (e) {
-        console.error(e);
-        reply('An error occurred while fetching the menu.');
-    }
-});
+   return await conn.sendMessage(from,{image: {url:https://telegra.ph/file/6fea4e5e00bc0d9395f15.jpg},caption:madeMenu},{quoted: mek})
+}catch(e){
+console.log(e)
+reply(𝔼𝕣𝕣𝕣𝕠𝕣)
+}
