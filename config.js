@@ -12,10 +12,7 @@ ALIVE_MSG: process.env.ALIVE_MSG || "🤖𝗛𝗘𝗬 𝗜 𝗔𝗠 𝗠𝗥.�
 AUTO_READ_STATUS: process.env.AUTO_READ_STATUS || "true",
 MODE: process.env.MODE || "private",
 ALWAYS_ONLINE : process.env.ALWAYS_ONLINE || "false",
-AUTO_TYPING: process.env.AUTO_TYPING || "false",
+AUTO_TYPING: process.env.AUTO_TYPING || "true",
  AUTO_RECORDING: process.env.AUTO_RECORDING || "false", 
-AUTO_STATUS_REPLY: process.env.AUTO_STATUS_REPLY || "true",
-AUTO_STATUS__MSG: process.env.AUTO_STATUS__MSG || "*SEEN YOUR STATUS BY MR.NADUWA🤍*",
- 
 
 };
