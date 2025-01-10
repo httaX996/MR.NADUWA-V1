@@ -51,7 +51,7 @@ _🔢 Reply The Number That You Want_
           },
           externalAdReply: {
               title: `𝗠𝗥.𝗡𝗔𝗗𝗨𝗪𝗔  |   𝗩1📌`,
-              body: `🤖 ᴍᴀᴅᴇ ʙʏ ᴅᴀʀᴋ ᴀʀᴏᴏᴡ ᴛᴇᴀᴍ  🤖`,
+              body: `✅ ᴍᴀᴅᴇ ʙʏ ᴍʀ.ɴᴀᴅᴜᴡᴀ-ᴠ1 ✅`,
               thumbnailUrl: `https://telegra.ph/file/6fea4e5e00bc0d9395f15.jpg`,
               sourceUrl: ``,
               
