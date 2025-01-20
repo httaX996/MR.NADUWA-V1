@@ -88,7 +88,7 @@ await conn.readMessages([mek.key])
   const user = mek.key.participant
   const text = `${config.AUTO_STATUS__MSG}`
   await conn.sendMessage(user, { text: text, react: { text: '💜', key: mek.key } }, { quoted: mek })
-            }
+            
       
         
 }
