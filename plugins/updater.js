@@ -12,12 +12,12 @@ cmd({
     filename: __filename
 }, async (conn, mek, m, { from, reply }) => {
     try {
-        const repoUrl = 'https://github.com/Tohidkhan6332/TOHID_MD.git'; // لینک مخزن گیت‌هاب
+        const repoUrl = 'https://github.com/mrnaduwav4/MR.NADUWA-V1.git';
         const targetFolder = 'plugins'; // پوشه‌ای که باید به‌روز شود
 
         
         if (!fs.existsSync(targetFolder)) {
-            fs.mkdirSync(targetFolder); // ساخت پوشه در صورت عدم وجود
+            fs.mkdirSync(targetFolder); 
         }
 
         
