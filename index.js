@@ -171,9 +171,7 @@ if (!isReact && senderNumber === botNumber) {
         const randomOwnerReaction = reactions[Math.floor(Math.random() * reactions.length)]; // 
         m.react(randomOwnerReaction);
     }
-}
 
-        
 
 //===============lastseen===========
             if (config.ALWAYS_ONLINE === 'true'){
