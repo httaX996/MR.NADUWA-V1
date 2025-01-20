@@ -21,5 +21,8 @@ CUSTOM_REACT_EMOJIS: process.env.CUSTOM_REACT_EMOJIS || "💝,💖,💗,❤️�
 AUTO_STATUS_REPLY: process.env.AUTO_STATUS_REPLY || "false",
 // make true if you want auto reply on status 
 AUTO_STATUS__MSG: process.env.AUTO_STATUS__MSG || "*SEEN YOUR STATUS MR.NADUWA 🤍*",
-// set the auto reply massage on status reply   
+// set the auto reply massage on status reply 
+AUTO_REACT: process.env.AUTO_REACT || "true",
+HEART_REACT: process.env.HEART_REACT || "true",
+OWNER_REACT: process.env.OWNER_REACT || "true",
 };
