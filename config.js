@@ -13,6 +13,13 @@ AUTO_READ_STATUS: process.env.AUTO_READ_STATUS || "true",
 MODE: process.env.MODE || "private",
 ALWAYS_ONLINE : process.env.ALWAYS_ONLINE || "false",
 AUTO_TYPING: process.env.AUTO_TYPING || "false",
- AUTO_RECORDING: process.env.AUTO_RECORDING || "false", 
-
+ AUTO_RECORDING: process.env.AUTO_RECORDING || "false",
+CUSTOM_REACT: process.env.CUSTOM_REACT || "false",
+// make this true for custum emoji react    
+CUSTOM_REACT_EMOJIS: process.env.CUSTOM_REACT_EMOJIS || "💝,💖,💗,❤️‍🩹,❤️,🧡,💛,💚,💙,💜,🤎,🖤,🤍",
+// chose custom react emojis by yourself 
+AUTO_STATUS_REPLY: process.env.AUTO_STATUS_REPLY || "true",
+// make true if you want auto reply on status 
+AUTO_STATUS__MSG: process.env.AUTO_STATUS__MSG || "*SEEN YOUR STATUS MR.NADUWA 🤍*",
+// set the auto reply massage on status reply   
 };
