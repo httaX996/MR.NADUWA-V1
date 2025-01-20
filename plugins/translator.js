@@ -33,7 +33,7 @@ async (conn, mek, m, { from, q, reply }) => {
 
 🌐 *Language*: ${targetLang.toUpperCase()}
 
-*QUEEN-SADU CREATION*`;
+*MR.NAADUWA-SADU CREATION*`;
 
         return reply(translationMessage);
     } catch (e) {
