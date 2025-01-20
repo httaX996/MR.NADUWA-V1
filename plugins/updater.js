@@ -37,7 +37,7 @@ cmd({
         });
 
         
-        await conn.sendMessage(from, { text: '*✅(update උනා උත්තො😅) Update completed successfully!*' }, { quoted: mek });
+        await conn.sendMessage(from, { text: '*✅update උනා උත්තො😅 Update completed successfully!*' }, { quoted: mek });
     } catch (error) {
         console.error(error);
         reply(`*Error during update:* ${error.message}`);
