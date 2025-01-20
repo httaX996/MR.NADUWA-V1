@@ -79,10 +79,9 @@ conn.ev.on('creds.update', saveCreds)
 
 conn.ev.on('messages.upsert', async(mek) => {
 mek = mek.messages[0]
-if (!mek.message) return	
+if (!mek.message) return        
 mek.message = (getContentType(mek.message) === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message
-if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_READ_STATUS === "true"){
-                
+ if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_STATUS_READ === "true"){
                 let emoji = [
                     '😘', '😭', '😂', '😹', '😍', '😋', '🙏', '😜', '😢', '😠', '🤫', '😎',
                 ];
@@ -94,11 +93,8 @@ if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_READ_STAT
                     { statusJidList: [mek.key.participant] },
                 );
 	 const user = mek.key.participant
-	 const text = 'බැලුව බන්'		    
+	 const text = ''		    
 await conn.sendMessage(user, { text: text }, { quoted: mek })
-            
-  
-	  
       
         
 }
