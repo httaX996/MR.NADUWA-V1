@@ -1,8 +1,8 @@
 const config = require('../config')
 const {cmd , commands} = require('../command')
 cmd({
-    pattern: "menu2",
-    react: "👾",
+    pattern: "menu",
+    react: "🇱🇰",
     desc: "get cmd list",
     category: "main",
     filename: __filename
