@@ -1,31 +1,31 @@
-const config = require('../config');
+🥀const config = require('../config');
 let fs = require('fs');
 const { exec } = require('child_process');
 const { cmd } = require('../command');
 
 cmd({
     pattern: "update",
-    react: "⚙️",
-    desc: "Update Repo GitHub",
+    react: "🔄",
+    desc: "Update folder from GitHub",
     category: "system",
     use: '.update',
     filename: __filename
 }, async (conn, mek, m, { from, reply }) => {
     try {
-        const repoUrl = 'https://github.com/mrnaduwav4/MR.NADUWA-V1.git'; 
-        const targetFolder = 'plugins';
+        const repoUrl = 'https://github.com/Tohidkhan6332/TOHID_MD.git'; // لینک مخزن گیت‌هاب
+        const targetFolder = 'plugins'; // پوشه‌ای که باید به‌روز شود
 
         
         if (!fs.existsSync(targetFolder)) {
-            fs.mkdirSync(targetFolder); 
+            fs.mkdirSync(targetFolder); // ساخت پوشه در صورت عدم وجود
         }
 
-
+        
         const gitCommand = fs.existsSync(`${targetFolder}/.git`)
             ? `git -C ${targetFolder} pull`
             : `git clone ${repoUrl} ${targetFolder}`;
 
-
+        // اجرای دستور گیت
         await new Promise((resolve, reject) => {
             exec(gitCommand, (err, stdout, stderr) => {
                 if (err) {
@@ -36,7 +36,8 @@ cmd({
             });
         });
 
-        await conn.sendMessage(from, { text: '*✅ Update completed successfully!*' }, { quoted: mek });
+        
+        await conn.sendMessage(from, { text: '*✅(update උනා උත්තො😅) Update completed successfully!*' }, { quoted: mek });
     } catch (error) {
         console.error(error);
         reply(`*Error during update:* ${error.message}`);
