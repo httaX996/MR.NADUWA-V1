@@ -1,134 +1,47 @@
-const axios = require('axios');
-const {cmd , commands} = require('../command')
-
-
+const { cmd } = require('../command');
 
 cmd({
-    pattern: "owner",
-    desc: "owner the bot",
-    category: "main",
-    react: "👨‍💻",
-    filename: __filename
-},
-
-async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
-try{
-
-let dec = `*👋 Hello ${pushname}*
-
-*👨‍💻MR.NADUWA-V2👨‍💻*
-
-> *𝗢𝗪𝗡𝗘𝗥 𝗜𝗡𝗙𝗢* 
-
-*⚡ᴏᴡɴᴇʀ ɴᴀᴍᴇ -: MR.NADUWA*
-*⚡ɴᴜᴍʙᴇʀ* -: 94767073275
-*⚡ᴡʜᴀᴛꜱᴀᴘᴘ ᴄʜᴀɴɴᴇʟ-:* 
-
-
-> *ᴘᴏᴡᴇʀᴇᴅ ʙʏ NADUWA*
-`
-await conn.sendMessage(from,{image:{url:`https://telegra.ph/file/6fea4e5e00bc0d9395f15.jpg`},caption:dec},{quoted:mek});
-
-}catch(e){
-console.log(e)
-reply(`${e}`)
-}
-});
-
-cmd({
-    pattern: "repo",
-    desc: "repo the bot",
-    react: "📡",
+    pattern: "owner2",
+    react: "👑", // Reaction emoji when the command is triggered
+    alias: ["silent", "king"],
+    desc: "Get owner number",
     category: "main",
     filename: __filename
-},
-
-async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
-try{
-
-let dec = `*📍ℝ𝔼ℙ𝕆-𝕃𝕀ℕ𝕂 ❤️‍🔥👇*
-
-👨‍💻 https://github.com/mrnaduwav4/MR.NADUWA-V1.git
-
-
-*📍ℙ𝕃𝔼𝔸𝕊𝔼 𝔽𝕆𝕃𝕃𝕆𝕎 𝕄𝕐 𝕎ℍ𝔸𝕋𝕊𝔸ℙℙ ℂℍ𝔸ℕℕ𝔼𝕃 ❤️‍🔥👇*
-
-👨‍💻◦ https://whatsapp.com/channel/0029VagpujoJJhzNP
-
-> *ᴘᴏᴡᴇʀᴇᴅ ʙʏ NADUWA*
-`
-await conn.sendMessage(from,{image:{url: `https://telegra.ph/file/6fea4e5e00bc0d9395f15.jpg`},caption:dec},{quoted:mek});
-
-}catch(e){
-console.log(e)
-reply(`${e}`)
-}
-});
-
-cmd({
-    pattern: "quote",
-    desc: "Get a random inspiring quote.",
-    category: "fun",
-    react: "馃挰",
-    filename: __filename
-},
-async (conn, mek, m, { from, reply }) => {
+}, 
+async (conn, mek, m, { from }) => {
     try {
-        const response = await axios.get('https://api.quotable.io/random');
-        const quote = response.data;
-        const message = `
-馃挰 "${quote.content}"
-- ${quote.author}
-饾悘饾悗饾悥饾悇饾悜饾悇饾悆 饾悂饾悩 饾悞饾悁饾悋饾悁饾悞-饾悓饾悆 饾悙饾悢饾悗饾悡饾悇饾悞
-        `;
-        return reply(message);
-    } catch (e) {
-        console.error("Error fetching quote:", e);
-        reply("垄蟽蠀鈩撯垈 畏蟽褌 茠褦褌垄薪 伪 q蠀蟽褌褦. 蟻鈩撗斘毖曆� 褌褟褍 伪g伪喂畏 鈩撐毖傃斞�.");
-    }
-});
+        // Owner's contact info
+        const ownerNumber = '94767073275'; // Replace this with the actual owner number
+        const ownerName = '➺ᴍʀ 𝙽𝙰𝙳𝚄𝚆𝙰࿐'; // Replace this with the owner's name
+        const organization = 'MR.NADUWA-V1 TEAM'; // Optional: replace with the owner's organization
 
-cmd({
-    pattern: "news",
-    desc: "Get the latest news headlines.",
-    category: "news",
-    react: "📰",
-    filename: __filename
-},
-async (conn, mek, m, { from, reply }) => {
-    try {
-        const apiKey="0f2c43ab11324578a7b1709651736382";
-        const response = await axios.get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`);
-        const articles = response.data.articles;
+        // Create a vCard (contact card) for the owner
+        const vcard = 'BEGIN:VCARD\n' +
+                      'VERSION:3.0\n' +
+                      `FN:${ownerName}\n` +  // Full Name
+                      `ORG:${organization};\n` +  // Organization (Optional)
+                      `TEL;type=CELL;type=VOICE;waid=${ownerNumber.replace('+', '')}:${ownerNumber}\n` +  // WhatsApp ID and number
+                      'END:VCARD';
 
-        if (!articles.length) return reply("No news articles found.");
-
-        // Send each article as a separate message with image and title
-        for (let i = 0; i < Math.min(articles.length, 5); i++) {
-            const article = articles[i];
-            let message = `
-📰 *${article.title}*
-⚠️ _${article.description}_
-🔗 _${article.url}_
-
-> *ᴘᴏᴡᴇʀᴇᴅ ʙʏ NADUWA*
-            `;
-
-            console.log('Article URL:', article.urlToImage); // Log image URL for debugging
-
-            if (article.urlToImage) {
-                // Send image with caption
-                await conn.sendMessage(from, { image: { url: article.urlToImage }, caption: message });
-            } else {
-                // Send text message if no image is available
-                await conn.sendMessage(from, { text: message });
+        // Send the vCard first
+        const sentVCard = await conn.sendMessage(from, {
+            contacts: {
+                displayName: ownerName,
+                contacts: [{ vcard }]
             }
-        };
-    } catch (e) {
-        console.error("Error fetching news:", e);
-        reply("Could not fetch news. Please try again later.");
-    }
+        });
+
+        // Send a reply message that references the vCard
+        await conn.sendMessage(from, {
+            text: `This is the owner's contact: ${ownerName}`,
+            contextInfo: {
+                mentionedJid: [ownerNumber.replace('94767073275') + '94767073275@s.whatsapp.net'], // Mention the owner
+                quotedMessageId: sentVCard.key.id // Reference the vCard message
+            }
+        }, { quoted: mek });
+
+    } catch (error) {
+        console.error(error);
+        await conn.sendMessage(from, { text: 'Sorry, there was an error fetching the owner contact.' }, { quoted: mek });
+    }
 });
-
-
-

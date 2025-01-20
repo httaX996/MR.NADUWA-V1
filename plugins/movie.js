@@ -1,333 +1,156 @@
-const { cmd } = require('../command');
-const axios = require('axios');
-const fs = require('fs').promises;
-const path = require('path');
-// Powerd by Thenux-AI & NETHUMAX
+/*
+Please Give Credit 🙂❤️
+⚖️𝐏𝐨𝐰𝐞𝐫𝐞𝐝 𝐁𝐲 - : ©MR.NADUWA💚
+*/
+
+const { cmd, commands } = require('../command');
+const { fetchJson } = require('../lib/functions');
+const domain = `https://manu-ofc-api-site-6bfcbe0e18f6.herokuapp.com`;
+const api_key = `Manul-Ofc-Sl-Sub-Key-9`;
+
+//===== Api-Key එක මට Message එකක් දාල ඉල්ලගන්න, +94 74 227 4855 සල්ලි ගන්න නෙවේ, කීයක් Use කරනවද දැනගන්න...❤️=====
+
+//============================================
+
 cmd({
-    pattern: "firemovie",
-    alias: ["moviefire", "moviesearch"],
-    react: "🎬",
-    desc: "Search Movies on Fire Movies Hub",
-    category: "media",
-    use: ".firemovie <movie name>",
+    pattern: "sinhala2",
+    alias: ["slsub", "sinhalasub"],
+    react: '📑',
+    category: "download",
+    desc: "Search movies on sinhalasub and get download links",
     filename: __filename
-}, async (conn, mek, m, { from, reply, args, q }) => {
+}, async (conn, m, mek, { from, isMe, isOwner, q, reply }) => {
     try {
-        // Check if query is provided
-        if (!q) {
-            return await reply(`
-*🎬 FIRE MOVIE SEARCH*
+        // Check if search query is provided
+        if (!q || q.trim() === '') return await reply('*Please provide a search query! (e.g., Deadpool)*');
+        if (!isMe && !isOwner) return await reply('*Only Bot Number Can Movie Download !!!*');
 
-Usage: .firemovie <movie name>
+        // Fetch search results from API
+        const manu = await fetchJson(`${domain}/api/sl-sub-search?query=${q}&apikey=${api_key}`);
+        const movieData = manu.data.data; // Use the `data.data` array
 
-Examples:
-.firemovie Iron Man
-.firemovie Avengers
-.firemovie Spider-Man
-
-*Tips:*
-- Be specific with movie name
-- Use full movie titles`);
+        // Check if the API returned valid results (array of movies)
+        if (!Array.isArray(movieData) || movieData.length === 0) {
+            return await reply(`No results found for: ${q}`);
         }
 
-        // React to show processing
-        await m.react("🔍");
+        // Limit to first 10 results
+        const searchResults = movieData.slice(0, 10);
 
-        // Encode query for URL
-        const encodedQuery = encodeURIComponent(q);
+        // Format and send the search results message
+        let resultsMessage = `📽️ *Search Results for* "${q}":\n\n`;
+        searchResults.forEach((result, index) => {
+            const title = result.title || 'No title available';
+            const link = result.link || 'No link available';
+            const thumbnail = result.thumbnail || 'https://via.placeholder.com/150'; // Fallback if thumbnail is missing
+            resultsMessage += `*${index + 1}.* ${title}\n🔗 Link: ${link}\n`;
 
-        // API Request for movie search
-        const searchResponse = await axios.get(`https://www.dark-yasiya-api.site/movie/firemovie/search?text=${encodedQuery}`);
+            // You can also display the thumbnail in the results if needed
+            resultsMessage += `📸 Thumbnail: ${thumbnail}\n\n`;
+        });
 
-        // Validate search response
-        if (!searchResponse.data || !searchResponse.data.status) {
-            return await reply("❌ No movies found or API error.");
-        }
-
-        // Extract movies
-        const movies = searchResponse.data.result.data;
-
-        // Check if movies exist
-        if (movies.length === 0) {
-            return await reply(`❌ No movies found for "${q}".`);
-        }
-
-        // Prepare movie list message
-        let desc = `*乂 THENU-MD MOVIE SEARCH ◉◉►*
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-
-${movies.map((movie, index) => `*${index + 1}. ${movie.title} (${movie.year})*
-   📄 Type: ${movie.type}
-   🔗 Link: ${movie.link}
-`).join('\n')}
-
-┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-
-*乂◉◉► REPLY THE NUMBER FOR DETAILS* 
-
-┌───────────────────────────────────
-*Choose a number to get movie details*
-└───────────────────────────────────
-> *©ᴘᴏᴡᴇʀᴇᴅ ʙʏ Thenux AI*`;
-
-        // Send the movie list with context
-        const sentMsg = await conn.sendMessage(
-            from,
-            {
-                text: desc,
-                contextInfo: {
-                    externalAdReply: {
-                        title: `Thenu-MD Movie Search`,
-                        body: `Search results for: ${q}`,
-                        thumbnailUrl: movies[0].image,
-                        sourceUrl: movies[0].link,
-                        mediaType: 1,
-                        renderLargerThumbnail: true
-                    },
-                },
-            },
-            { quoted: mek }
-        );
+        const sentMsg = await conn.sendMessage(m.chat, {
+            image: { url: searchResults[0].thumbnail }, // Show the thumbnail of the first result
+            caption: `${resultsMessage}`
+        }, { quoted: mek });
 
         const messageID = sentMsg.key.id;
 
-        // Listen for user's response
-        conn.ev.on("messages.upsert", async (messageUpdate) => {
-            const mek = messageUpdate.messages[0];
-            if (!mek.message) return;
+        // Event listener for user's selection of a movie from search results
+        const handleSearchReply = async (replyMek, selectedNumber) => {
+            const selectedMovie = searchResults[selectedNumber - 1];
+            const response = await fetchJson(`${domain}/api/slsub-movie-info?url=${encodeURIComponent(selectedMovie.link)}&apikey=${api_key}`);
             
-            const messageType = 
-                mek.message.conversation || 
-                mek.message.extendedTextMessage?.text;
-            
-            const isReplyToSentMsg =
-                mek.message.extendedTextMessage &&
-                mek.message.extendedTextMessage.contextInfo.stanzaId === messageID;
+            try {
+                const movieDetails = response.data;
+                const downloadLinks = movieDetails.downloadLinks || [];
+
+                if (downloadLinks.length === 0) {
+                    return await reply('No download links found.');
+                }
+
+                let downloadMessage = `🎥 *${movieDetails.title}*\n\n*Available Download Links:*\n`;
+                downloadLinks.forEach((link, index) => {
+                    downloadMessage += `*${index + 1}.* ${link.quality} - ${link.size}\n🔗 Link: ${link.link}\n\n`;
+                });
+
+                const pixelDrainMsg = await conn.sendMessage(m.chat, {
+                    image: { url: selectedMovie.thumbnail }, // Show the selected movie's thumbnail
+                    caption: `${downloadMessage}`
+                }, { quoted: replyMek });
+
+                const pixelDrainMessageID = pixelDrainMsg.key.id;
+
+                // Event listener for the user to choose download quality
+                const handleDownloadReply = async (pdReply, qualityNumber) => {
+                    const selectedLink = downloadLinks[qualityNumber - 1];
+                    const file = selectedLink.link;
+                    const fileResponse = await fetchJson(`${domain}/api/slsub-direct-link?url=${encodeURIComponent(file)}&apikey=${api_key}`);
+                    const downloadLink = fileResponse.data.downloadLink;
+                    const fileId = downloadLink.split('/').pop();
+
+                    await conn.sendMessage(from, { react: { text: '⬇️', key: mek.key } });
+
+                    const directDownloadUrl = `https://pixeldrain.com/api/file/${fileId}`;
+
+                    await conn.sendMessage(from, { react: { text: '⬆', key: mek.key } });
+
+                    await conn.sendMessage(from, {
+                                document: {
+                                    url: directDownloadUrl
+                                },
+                                mimetype: 'video/mp4',
+                                fileName: `${movieDetails.title} - ${selectedLink.quality}.mp4`,
+                                caption: `${movieDetails.title}\nQuality: ${selectedLink.quality}\n\n> *⚖️𝐏𝐨𝐰𝐞𝐫𝐞𝐝 𝐘𝐝 𝐵𝐲 - : ©𝐌𝐑 NADUWA-V1💚*`
+                            }, { quoted: pdReply });
+
+                    await conn.sendMessage(from, { react: { text: '✅', key: mek.key } });
+                };
+
+                // Listen for user's reply to select the download quality
+                conn.ev.on('messages.upsert', async (pdUpdate) => {
+                    const pdReply = pdUpdate.messages[0];
+                    if (!pdReply.message) return;
+                    const pdMessageType = pdReply.message.conversation || pdReply.message.extendedTextMessage?.text;
+                    const isReplyToPixelDrainMsg = pdReply.message.extendedTextMessage && pdReply.message.extendedTextMessage.contextInfo.stanzaId === pixelDrainMessageID;
+
+                    if (isReplyToPixelDrainMsg) {
+                        const qualityNumber = parseInt(pdMessageType.trim());
+                        if (!isNaN(qualityNumber) && qualityNumber > 0 && qualityNumber <= downloadLinks.length) {
+                            handleDownloadReply(pdReply, qualityNumber);
+                        } else {
+                            await reply('Invalid selection. Please reply with a valid number.');
+                        }
+                    }
+                });
+
+            } catch (error) {
+                console.error('Error fetching movie details:', error);
+                await reply('Sorry, something went wrong while fetching the movie details.');
+            }
+        };
+
+        // Listen for user to select a movie from search results
+        conn.ev.on('messages.upsert', async (messageUpdate) => {
+            const replyMek = messageUpdate.messages[0];
+            if (!replyMek.message) return;
+            const messageType = replyMek.message.conversation || replyMek.message.extendedTextMessage?.text;
+            const isReplyToSentMsg = replyMek.message.extendedTextMessage && replyMek.message.extendedTextMessage.contextInfo.stanzaId === messageID;
 
             if (isReplyToSentMsg) {
-                // Check if the reply is a valid number
-                const selectedIndex = parseInt(messageType) - 1;
-                
-                if (selectedIndex >= 0 && selectedIndex < movies.length) {
-                    const selectedMovie = movies[selectedIndex];
-
-                    try {
-                        // Fetch detailed movie information
-                        const detailResponse = await axios.get(`https://www.dark-yasiya-api.site/movie/firemovie/movie?url=${encodeURIComponent(selectedMovie.link)}`);
-
-                        if (!detailResponse.data || !detailResponse.data.status) {
-                            return await reply("❌ Failed to fetch movie details.");
-                        }
-
-                        const movieDetails = detailResponse.data.result.data;
-
-                        // React to the selection
-                        await conn.sendMessage(from, {
-                            react: { text: "🎬", key: mek.key }
-                        });
-
-                        // Prepare detailed movie message
-                        const detailMessage = `
-*🎬 MOVIE DETAILS*
-
-📽️ *Title*: ${movieDetails.title}\n
-📅 *Release Date*: ${movieDetails.date}\n
-⏱️ *Duration*: ${movieDetails.duration}\n
-
-🏷️ *Categories*: 
-${movieDetails.category.join(", ")}
-
-🎥 *Director*: ${movieDetails.director}\n
-⭐ *TMDB Rating*: ${movieDetails.tmdbRate}
-
-*🌟 CAST*:
-${movieDetails.cast.slice(0, 5).map(actor => `• ${actor.name}`).join('\n')}
-
-*🔗 DOWNLOAD OPTIONS*:
-${movieDetails.dl_links.map((link, index) => 
-    `*${index + 1}. ${link.quality}* (${link.size})`
-).join('\n')}
-
-> Powered by Fire Movies Hub`;
-
-                        // Send movie details with main image
-                        const mediaMessage = await conn.sendMessage(from, {
-                            image: { url: movieDetails.mainImage },
-                            caption: detailMessage
-                        }, { quoted: mek });
-
-                        // Store movie details globally for download option
-                        global.movieDownloadDetails = {
-                            links: movieDetails.dl_links,
-                            title: movieDetails.title
-                        };
-
-                        // Send download instruction message
-                        /*await conn.sendMessage(from, {
-                            text: `
-*🔽 DOWNLOAD OPTIONS*
-
-Reply with the number corresponding to the download quality:
-${movieDetails.dl_links.map((link, index) => 
-    `*${index + 1}.* ${link.quality} (${link.size})`
-).join('\n')}
-
-> Choose your preferred download option`,
-                            contextInfo: {
-                                externalAdReply: {
-                                    title: "Movie Download",
-                                    body: `Download ${movieDetails.title}`,
-                                    mediaType: 1
-                                }
-                            }
-                        }, { quoted: mediaMessage });*/
-
-                    } catch (detailError) {
-                        console.error("Movie Detail Fetch Error:", detailError);
-                        await reply("❌ Failed to fetch movie details.");
-                    }
+                const selectedNumber = parseInt(messageType.trim());
+                if (!isNaN(selectedNumber) && selectedNumber > 0 && selectedNumber <= searchResults.length) {
+                    handleSearchReply(replyMek, selectedNumber);
                 } else {
-                    // Invalid number selected
-                    await conn.sendMessage(from, {
-                        react: { text: "❓", key: mek.key }
-                    });
-                    reply("Please enter a valid movie number!");
-                }
-            } else if (global.movieDownloadDetails) {
-                // Handle download option selection
-                const selectedDownloadIndex = parseInt(messageType) - 1;
-                
-                if (selectedDownloadIndex >= 0 && 
-                    selectedDownloadIndex < global.movieDownloadDetails.links.length) {
-                    
-                    const selectedDownload = global.movieDownloadDetails.links[selectedDownloadIndex];
-                    
-                    // Send download link and file
-                    await conn.sendMessage(from, {
-                        react: { text: "📥", key: mek.key }
-                    });
-
-                    // Show processing message
-                    const processingMsg = await reply(`🔄 Preparing download for ${global.movieDownloadDetails.title}...`);
-
-                    try {
-                        // Download the file
-                        const downloadResponse = await axios({
-                            method: 'get',
-                            url: selectedDownload.link,
-                            responseType: 'arraybuffer',
-                            maxContentLength: Infinity,
-                            maxBodyLength: Infinity,
-                            headers: {
-                                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-                            }
-                        });
-
-                        // Generate a random filename
-                        const sanitizedTitle = global.movieDownloadDetails.title
-                            .replace(/[^a-zA-Z0-9]/g, '_')
-                            .replace(/__+/g, '_')
-                            .substring(0, 50);
-                        
-                        const filename = `${sanitizedTitle}_${selectedDownload.quality}.mp4`;
-                        const tempFilePath = path.join(__dirname, 'temp', filename);
-
-                        // Ensure temp directory exists
-                        await fs.mkdir(path.join(__dirname, 'temp'), { recursive: true });
-
-                        // Write the file temporarily
-                        await fs.writeFile(tempFilePath, downloadResponse.data);
-
-                        // Delete processing message
-                        await conn.sendMessage(from, { delete: processingMsg.key });
-
-                        // Send the file
-                        const fileMessage = await conn.sendMessage(from, {
-                            document: { 
-                                url: tempFilePath 
-                            },
-                            mimetype: 'video/mp4',
-                            fileName: filename,
-                            caption: `
-*🎬 DOWNLOADED MOVIE*
-
-📽️ *Title*: ${global.movieDownloadDetails.title}
-📊 *Quality*: ${selectedDownload.quality}
-📦 *Size*: ${selectedDownload.size}
-
-> *©ᴘᴏᴡᴇʀᴇᴅ ʙʏ Thenux AI*`
-                        }, { quoted: mek });
-
-                        // Optional: Send progress message
-                        await reply(`✅ *Download Complete*\n📥 File: ${filename}`);
-
-                        // Clean up temporary file after a delay
-                        setTimeout(async () => {
-                            try {
-                                await fs.unlink(tempFilePath);
-                            } catch (cleanupError) {
-                                console.log("Temp file cleanup error:", cleanupError);
-                            }
-                        }, 5 * 60 * 1000); // 5 minutes delay
-
-                        // React to successful download
-                        await conn.sendMessage(from, {
-                            react: { text: "✅", key: mek.key }
-                        });
-
-                    } catch (downloadError) {
-                        console.error("Movie Download Error:", downloadError);
-                        
-                        // Delete processing message
-                        await conn.sendMessage(from, { delete: processingMsg.key });
-
-                        // Detailed error handling
-                        let errorMessage = "❌ Download failed. ";
-                        if (downloadError.response) {
-                            switch (downloadError.response.status) {
-                                case 404:
-                                    errorMessage += "Download link is no longer valid.";
-                                    break;
-                                case 403:
-                                    errorMessage += "Access to the file is restricted.";
-                                    break;
-                                case 500:
-                                    errorMessage += "Server error occurred.";
-                                    break;
-                                default:
-                                    errorMessage += `HTTP Error: ${downloadError.response.status}`;
-                            }
-                        } else if (downloadError.code) {
-                            switch (downloadError.code) {
-                                case 'ECONNABORTED':
-                                    errorMessage += "Download timed out.";
-                                    break;
-                                case 'ENOTFOUND':
-                                    errorMessage += "Unable to connect to download server.";
-                                    break;
-                                default:
-                                    errorMessage += `Network Error: ${downloadError.code}`;
-                            }
-                        } else {
-                            errorMessage += "An unexpected error occurred.";
-                        }
-
-                        // Send error message
-                        await reply(errorMessage);
-
-                        // React to error
-                        await conn.sendMessage(from, {
-                            react: { text: "❌", key: mek.key }
-                        });
-                    }
-
-                    // Clean up global store
-                    delete global.movieDownloadDetails;
+                    await reply('Invalid selection. Please reply with a valid number.');
                 }
             }
         });
+
     } catch (error) {
-        console.error("Movie Search Error:", error);
-        await reply("❌ An error occurred during the movie search.");
+        console.error('Error in sinhala command:', error);
+        await reply('Sorry, something went wrong. Please try again later.');
     }
 });
+
+//=============©𝐌𝐑 NADuwa 💚==========
