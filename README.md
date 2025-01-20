@@ -20,9 +20,9 @@
 
     
 
-![forks](https://img.shields.io/github/forks/mrnaduwav4/MR.NADUWA-V1/forks?label=Forks&style=social)
+![forks](https://img.shields.io/github/forks/mrnaduwav4/MR.NADUWA-V1?label=Forks&style=social)
 
-![stars](https://img.shields.io/github/stars/mrnaduwav4/MR.NADUWA-V1/forks?style=social)
+![stars](https://img.shields.io/github/stars/mrnaduwav4/MR.NADUWA-V1?style=social)
 
 
 
