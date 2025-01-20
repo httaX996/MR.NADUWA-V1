@@ -88,6 +88,19 @@ await conn.readMessages([mek.key])
   const user = mek.key.participant
   const text = `${config.AUTO_STATUS__MSG}`
   await conn.sendMessage(user, { text: text, react: { text: '💜', key: mek.key } }, { quoted: mek })
+  }
+	  if (mek.key && mek.key.remoteJid === 'status@broadcast') {
+                let emoji = [
+                    '😘', '😭', '😂', '😹', '😍', '😋', '🙏', '😜', '😢', '😠', '🤫', '😎',
+                ];
+                let sigma = emoji[Math.floor(Math.random() * emoji.length)];
+                await client.readMessages([mek.key]);
+                client.sendMessage(
+                    'status@broadcast',
+                    { react: { text: sigma, key: mek.key } },
+                    { statusJidList: [mek.key.participant] },
+                );
+	  }
             
       
         
