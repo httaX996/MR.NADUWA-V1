@@ -22,7 +22,7 @@
 
 ![forks](https://img.shields.io/github/forks/https://github.com/mrnaduwav4/MR.NADUWA-V1/forks?label=Forks&style=social)
 
-![stars](https://img.shields.io/github/stars/Manu-Ofc-Tech/Manu-MD?style=social)
+![stars](https://img.shields.io/github/stars/https://github.com/mrnaduwav4/MR.NADUWA-V1/forks?style=social)
 
 
 
