@@ -154,22 +154,7 @@ m.react("⚖️")
 }
 
         
-//============================HRTPACK============================       
-        //=======HRT React 
-if (!isReact && senderNumber !== botNumber) {
-    if (config.HEART_REACT === 'true') {
-            const reactions = ['💘', '💝', '💖', '💗', '💓', '💞', '💕', '❣️', '❤️‍🔥', '❤️‍🩹', '❤️', '🩷', '🧡', '💛', '💚', '💙', '🩵', '💜', '🤎', '🖤', '🩶', '🤍'];
-           const randomReaction = reactions[Math.floor(Math.random() * reactions.length)]; // 
-        m.react(randomReaction);
-    }
-}
-//=======HRT React 
-if (!isReact && senderNumber === botNumber) {
-    if (config.HEART_REACT === 'true') {
-            const reactions = ['💘', '💝', '💖', '💗', '💓', '💞', '💕', '❣️', '❤️‍🔥', '❤️‍🩹', '❤️', '🩷', '🧡', '💛', '💚', '💙', '🩵', '💜', '🤎', '🖤', '🩶', '🤍'];
-           const randomReaction = reactions[Math.floor(Math.random() * reactions.length)]; // 
-        m.react(randomReaction);
-			   }
+
 //===============lastseen===========
             if (config.ALWAYS_ONLINE === 'true'){
                 await conn.sendPresenceUpdate('available', mek.key.remoteJid)
