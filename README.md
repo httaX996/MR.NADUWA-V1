@@ -16,7 +16,7 @@
 
 <p align="center">
   <a href="">
-    <img alt="MANU-MD" height="300" width="650" src="https://telegra.ph/file/6fea4e5e00bc0d9395f15.jpg">
+    <img alt="MR.NADUWA-V1" height="300" width="650" src="https://telegra.ph/file/6fea4e5e00bc0d9395f15.jpg">
 
     
 
@@ -27,16 +27,12 @@
 
 
 
-<a href="https://whatsapp.com/channel/0029VaN1XMn2ZjCsu9eZQP3R"><img src="https://img.shields.io/badge/%E2%9D%A4%EF%B8%8F%E2%80%8D%20Join%20Our%20WhatsApp%20Channel%F0%9F%91%A8%E2%80%8D%F0%9F%92%BB-green" alt="📎 Join Our WhatsApp Channel" width="300"></a>
+<a href="https://whatsapp.com/channel/0029VayEdjwDDmFYDraeTv2f"><img src="https://img.shields.io/badge/%E2%9D%A4%EF%B8%8F%E2%80%8D%20Join%20Our%20WhatsApp%20Channel%F0%9F%91%A8%E2%80%8D%F0%9F%92%BB-green" alt="📎 Join Our WhatsApp Channel" width="300"></a>
 
 <br>
 <br>
 
-## MY YT CHANNEL
 
-[![Youtube](https://telegra.ph/file/eebe86c26e98ffeae39ea.jpg)](https://youtube.com/@ManulOfficialTech) 
-
-</details>
 
 
 
@@ -62,12 +58,12 @@
 
 ### Copy This Code For Github Workflow 
 
-https://github.com/Manu-Ofc-Tech/GitHub-Workflow-Code
+https://github.com/mrnaduwav4/MR.NADUWA-V1/GitHub-Workflow-Code
 <br>
 <br>
 4. ## Deploy to HEROKU ↓
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Manu-Ofc-Tech/Manu-MD)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/mrnaduwav4/MR.NADUWA-V1.git)
 <br>
 <br>
 5. ## Deploy to RENDER ↓
@@ -95,12 +91,12 @@ https://github.com/Manu-Ofc-Tech/GitHub-Workflow-Code
 <br>
 <br>
 
-   <a href="https://github.com/manulofficial7/"><img src="https://telegra.ph/file/49e1bb852fe8292c2614a.jpg" width=80 height=80></a>   
+   <a href="https://github.com/manulofficial7/"><img src="https://telegra.ph/file/6fea4e5e00bc0d9395f15.jpg" width=80 height=80></a>   
 
-|**[`Manul-Official`](https://github.com/manulofficial7)**|
+|**[`MR.NADUWA-V1`](https://github.com/mrnaduwav4/MR.NADUWA-V1.git)**|
 
 
-## 👑 `Manu-MD BOT OWNER`👨‍💻 
+## 👑 `MR.NADUWA-V1 BOT OWNER`👨‍💻 
 
 `⚠️ We are not responsible for any inconvenience caused by your mistakes!   | ඔබගේ අත්වැරදීම් නිසා සිදුවන අපහසුතාවයන් සඳහා අප වගකිවයනු නොලැබේ.`
 
@@ -110,6 +106,6 @@ https://github.com/Manu-Ofc-Tech/GitHub-Workflow-Code
  <br>
  </p>
     <p align="center">
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=EB+Garamond&weight=800&size=28&duration=4000&pause=1000&random=false&width=435&lines=THANKS+ALL+USE+MY+BOT;Manu-MD" alt="Typing SVG" /></a>
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=EB+Garamond&weight=800&size=28&duration=4000&pause=1000&random=false&width=435&lines=THANKS+ALL+USE+MY+BOT;MR.NADUWA-V1" alt="Typing SVG" /></a>
 ---
 
