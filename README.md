@@ -54,16 +54,10 @@
 <br>
 ## DEPLOYMENT METHODS
 
-3. ## Deploy to WorkFlow ↓
 
-### Copy This Code For Github Workflow 
+3. ## Deploy to HEROKU ↓
 
-https://github.com/mrnaduwav4/MR.NADUWA-V1/GitHub-Workflow-Code
-<br>
-<br>
-4. ## Deploy to HEROKU ↓
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/mrnaduwav4/MR.NADUWA-V1.git)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?template=https://github.com/mrnaduwav4/MR.NADUWA-V1.git)
 <br>
 <br>
 5. ## Deploy to RENDER ↓
