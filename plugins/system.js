@@ -26,7 +26,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
 
         // Send the status message with an image
         await conn.sendMessage(from, { 
-            image: { url: `https://telegra.ph/file/6fea4e5e00bc0d9395f15.jpg` },  // Image URL
+            image: { url: `https://files.catbox.moe/iclcf6.jpeg` },  // Image URL
             caption: status,
             contextInfo: {
                 mentionedJid: [m.sender],
