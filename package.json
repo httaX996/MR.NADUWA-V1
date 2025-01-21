@@ -43,6 +43,23 @@
     "api-dylux":"1.8.5",
     "@mrnima/tiktok-downloader":"1.0.0",
     "@mrnima/facebook-downloader":"1.0.0",
-    "mrnima-moviedl":"1.0.0"
+    "mrnima-moviedl":"1.0.0",
+"pixaldrain-sinhalasub": "git+https://github.com/DarkMakerofc/pixaldrain-sinhalasub.git",
+    "@sl-code-lords/movie-api": "1.0.0",
+    "@sl-code-lords/si-subdl": "latest",
+    "wa-sticker-formatter" : "4.4.4",
+     "google-tts-api" : "2.0.2",
+    "fs-extra" : "11.2.0",
+    "xnxx-dl" : "1.0.4",
+    "child_process" : "1.0.2",
+    "os" : "0.1.2",
+    "@whiskeysockets/baileys" : "6.7.9",
+    "path" : "0.12.7",
+    "@bochilteam/scraper" : "5.0.1",
+    "megajs" : "1.3.5",
+    "mongoose" : "8.9.2",
+    "mrnima-moviedl": "1.0.0",
+    "cheerio" : "1.0.0"
+    
   }
 }
