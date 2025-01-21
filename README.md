@@ -16,7 +16,7 @@
 
 <p align="center">
   <a href="">
-    <img alt="MR.NADUWA-V1" height="300" width="650" src="https://telegra.ph/file/6fea4e5e00bc0d9395f15.jpg">
+    <img alt="MR.NADUWA-V1" height="300" width="650" src="https://files.catbox.moe/iclcf6.jpeg">
 
     
 
