@@ -16,7 +16,11 @@ fun: '',
 group: '',
 owner: '',
 convert: '',
-search: ''
+search: '',
+other: '',
+movie:'',
+news:'',
+tools: ''
 };
 
 for (let i = 0; i < commands.length; i++) {
