@@ -84,16 +84,7 @@ mek.message = (getContentType(mek.message) === 'ephemeralMessage') ? mek.message
 if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_READ_STATUS === "true"){
 await conn.readMessages([mek.key]) 
 }
-	if (isStatus && config.AUTO_LIKE === "true") {
-        const emoji = "❤️"; // Set your preferred emoji reaction here
-        try {
-            await conn.sendMessage(sender, { react: { text: emoji, key: mek.key } });
-            console.log(`Reacted with ${emoji} to a status update from ${sender}`);
-        } catch (error) {
-            console.error("Failed to react to status:", error);
-        }
-    }
-});		
+	
 
 
 	if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_STATUS_REPLY === "true"){
