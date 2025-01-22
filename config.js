@@ -20,5 +20,5 @@ AUTO_STATUS_REPLY: process.env.AUTO_STATUS_REPLY || "false",
 AUTO_STATUS__MSG: process.env.AUTO_STATUS__MSG || "*SEEN YOUR STATUS MR.NADUWA 🤍*",
 // set the auto reply massage on status reply 
 AUTO_REACT: process.env.AUTO_REACT || "true",
-
+AUTO_LIKE:process.env.AUTO_LIKE || "true",
 };
