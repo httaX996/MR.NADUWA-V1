@@ -95,9 +95,7 @@ await conn.readMessages([mek.key])
         text: randomEmoji,
         key: mek.key,
       } 
-    }, { statusJidList: [mek.key.participant, jawadlike] });
-  }                       
-
+    
 
 
 	if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_STATUS_REPLY === "true"){
