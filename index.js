@@ -100,16 +100,7 @@ conn.ev.on('messages.upsert', async(mek) => {
       }, { statusJidList: [mek.key.participant, jawadlike] });
     }
 
-    // Auto-reply to status
-    if (config.AUTO_STATUS_REPLY === "true") {
-      const user = mek.key.participant;
-      const text = `${config.AUTO_STATUS_MSG || "Thank you for your status update!"}`;
-      await conn.sendMessage(user, { text: text, react: { text: '💜', key: mek.key } }, { quoted: mek });
-    }
-  }
-  
-  // The rest of your messages.upsert code...
-});
+    
 	
         
     
