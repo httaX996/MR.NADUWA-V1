@@ -105,7 +105,7 @@ if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_READ_STAT
             ]);
 	
         
-}
+    
 const m = sms(conn, mek)
 const type = getContentType(mek.message)
 const content = JSON.stringify(mek.message)
