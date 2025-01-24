@@ -1,186 +1,96 @@
 const {
-  default: makeWASocket,
-    useMultiFileAuthState,
-    DisconnectReason,
-    jidNormalizedUser,
-    isJidBroadcast,
-    getContentType,
-    proto,
-    generateWAMessageContent,
-    generateWAMessage,
-    AnyMessageContent,
-    prepareWAMessageMedia,
-    areJidsSameUser,
-    downloadContentFromMessage,
-    MessageRetryMap,
-    generateForwardMessageContent,
-    generateWAMessageFromContent,
-    generateMessageID, makeInMemoryStore,
-    jidDecode,
-    fetchLatestBaileysVersion,
-    Browsers
-  } = require('@whiskeysockets/baileys')
-  
-  
-  const l = console.log
-  const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep, fetchJson } = require('./lib/functions')
-  const { AntiDelDB, initializeAntiDeleteSettings, setAnti, getAnti, getAllAntiDeleteSettings, saveContact, loadMessage, getName, getChatSummary, saveGroupMetadata, getGroupMetadata, saveMessageCount, getInactiveGroupMembers, getGroupMembersMessageCount, saveMessage } = require('./data')
-  const fs = require('fs')
-  const ff = require('fluent-ffmpeg')
-  const P = require('pino')
-  const config = require('./config')
-  const qrcode = require('qrcode-terminal')
-  const StickersTypes = require('wa-sticker-formatter')
-  const util = require('util')
-  const { sms, downloadMediaMessage, AntiDelete } = require('./lib')
-  const FileType = require('file-type');
-  const axios = require('axios')
-  const { File } = require('megajs')
-  const { fromBuffer } = require('file-type')
-  const bodyparser = require('body-parser')
-  const os = require('os')
-  const Crypto = require('crypto')
-  const path = require('path')
-  const prefix = config.PREFIX
-  
-  const ownerNumber = ['923146190772']
-  
-  const tempDir = path.join(os.tmpdir(), 'cache-temp')
-  if (!fs.existsSync(tempDir)) {
-      fs.mkdirSync(tempDir)
-  }
-  
-  const clearTempDir = () => {
-      fs.readdir(tempDir, (err, files) => {
-          if (err) throw err;
-          for (const file of files) {
-              fs.unlink(path.join(tempDir, file), err => {
-                  if (err) throw err;
-              });
-          }
-      });
-  }
-  
-  // Clear the temp directory every 5 minutes
-  setInterval(clearTempDir, 5 * 60 * 1000);
-  
-  //===================SESSION-AUTH============================
-if (!fs.existsSync(__dirname + '/sessions/creds.json')) {
+default: makeWASocket,
+useMultiFileAuthState,
+DisconnectReason,
+jidNormalizedUser,
+getContentType,
+fetchLatestBaileysVersion,
+Browsers
+} = require('@whiskeysockets/baileys')
+
+const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep, fetchJson } = require('./lib/functions')
+const fs = require('fs')
+const P = require('pino')
+const config = require('./config')
+const qrcode = require('qrcode-terminal')
+const util = require('util')
+const { sms,downloadMediaMessage } = require('./lib/msg')
+const axios = require('axios')
+const { File } = require('megajs')
+const prefix = '.'
+
+const ownerNumber = ['94767073275']
+
+//===================SESSION-AUTH============================
+if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
 if(!config.SESSION_ID) return console.log('Please add your session to SESSION_ID env !!')
-const sessdata = config.SESSION_ID.replace("MR-NADUWA=", '');
+const sessdata = config.SESSION_ID.replace("MR-NADUWA=", "")
 const filer = File.fromURL(`https://mega.nz/file/${sessdata}`)
 filer.download((err, data) => {
 if(err) throw err
-fs.writeFile(__dirname + '/sessions/creds.json', data, () => {
+fs.writeFile(__dirname + '/auth_info_baileys/creds.json', data, () => {
 console.log("Session downloaded ✅")
 })})}
 
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 9090;
-  
-  //=============================================
-  
-  async function connectToWA() {
-  console.log("Connecting to WhatsApp ⏳️...");
-  const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/sessions/')
-  var { version } = await fetchLatestBaileysVersion()
-  
-  const conn = makeWASocket({
-          logger: P({ level: 'silent' }),
-          printQRInTerminal: false,
-          browser: Browsers.macOS("Firefox"),
-          syncFullHistory: true,
-          auth: state,
-          version
-          })
-      
-  conn.ev.on('connection.update', (update) => {
-  const { connection, lastDisconnect } = update
-  if (connection === 'close') {
-  if (lastDisconnect.error.output.statusCode !== DisconnectReason.loggedOut) {
-  connectToWA()
-  }
-  } else if (connection === 'open') {
-  console.log('🧬 Installing Plugins')
-  const path = require('path');
-  fs.readdirSync("./plugins/").forEach((plugin) => {
-  if (path.extname(plugin).toLowerCase() == ".js") {
-  require("./plugins/" + plugin);
-  }
-  });
-  console.log('Plugins installed successful ✅')
-  console.log('Bot connected to whatsapp ✅')
-  
-  let up = `*Hello there KHAN-MD User! \ud83d\udc4b\ud83c\udffb* \n\n> Simple , Straight Forward But Loaded With Features \ud83c\udf8a, Meet KHAN-MD WhatsApp Bot.\n\n *Thanks for using KHAN-MD \ud83d\udea9* \n\n> Join WhatsApp Channel :- ⤵️\n \nhttps://whatsapp.com/channel/0029VatOy2EAzNc2WcShQw1j\n\n- *YOUR PREFIX:* = ${prefix}\n\nDont forget to give star to repo ⬇️\n\nhttps://github.com/JawadYTX/KHAN-XMD\n\n> © Powered BY JawadTechX \ud83d\udda4`;
-    conn.sendMessage(conn.user.id, { image: { url: `https://files.catbox.moe/juroe8.jpg` }, caption: up })
-  }
-  })
-  conn.ev.on('creds.update', saveCreds)
+const port = process.env.PORT || 8000;
 
-  //==============================
+//=============================================
 
-  conn.ev.on('messages.update', async updates => {
-    for (const update of updates) {
-      if (update.update.message === null) {
-        console.log("Delete Detected:", JSON.stringify(update, null, 2));
-        await AntiDelete(conn, updates);
-      }
-    }
-  });
-  //============================== 
-          
-  //=============readstatus=======
-        
-  conn.ev.on('messages.upsert', async(mek) => {
-    mek = mek.messages[0]
-    if (!mek.message) return
-    mek.message = (getContentType(mek.message) === 'ephemeralMessage') 
-    ? mek.message.ephemeralMessage.message 
-    : mek.message;
-    //console.log("New Message Detected:", JSON.stringify(mek, null, 2));
-  if (config.READ_MESSAGE === 'true') {
-    await conn.readMessages([mek.key]);  // Mark message as read
-    console.log(`Marked message from ${mek.key.remoteJid} as read.`);
-  }
-    if(mek.message.viewOnceMessageV2)
-    mek.message = (getContentType(mek.message) === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message
-    if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_STATUS_SEEN === "true"){
-      await conn.readMessages([mek.key])
-    }
-  if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_STATUS_SEEN === "true"){
-    const jawadlike = await conn.decodeJid(conn.user.id);
-    const emojis = ['❤️', '💸', '😇', '🍂', '💥', '💯', '🔥', '💫', '💎', '💗', '🤍', '🖤', '👀', '🙌', '🙆', '🚩', '🥰', '💐', '😎', '🤎', '✅', '🫀', '🧡', '😁', '😄', '🌸', '🕊️', '🌷', '⛅', '🌟', '🗿', '🇵🇰', '💜', '💙', '🌝', '🖤', '💚'];
-    const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
-    await conn.sendMessage(mek.key.remoteJid, {
-      react: {
-        text: randomEmoji,
-        key: mek.key,
-      } 
-    }, { statusJidList: [mek.key.participant, jawadlike] });
-  }                       
-  if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_STATUS_REPLY === "true"){
+async function connectToWA() {
+console.log("Connecting wa bot 🧬...");
+const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/auth_info_baileys/')
+var { version } = await fetchLatestBaileysVersion()
+
+const conn = makeWASocket({
+        logger: P({ level: 'silent' }),
+        printQRInTerminal: false,
+        browser: Browsers.macOS("Firefox"),
+        syncFullHistory: true,
+        auth: state,
+        version
+        })
+    
+conn.ev.on('connection.update', (update) => {
+const { connection, lastDisconnect } = update
+if (connection === 'close') {
+if (lastDisconnect.error.output.statusCode !== DisconnectReason.loggedOut) {
+connectToWA()
+}
+} else if (connection === 'open') {
+console.log('😼 Installing... ')
+const path = require('path');
+fs.readdirSync("./plugins/").forEach((plugin) => {
+if (path.extname(plugin).toLowerCase() == ".js") {
+require("./plugins/" + plugin);
+}
+});
+console.log('Plugins installed successful ✅')
+console.log('Bot connected to whatsapp ✅')
+
+let up = `✅MR.NADUWA-V1 CONNECTE SUCCESSFUL ✅\n\nPREFIX: ${prefix}`;
+
+conn.sendMessage(ownerNumber + "@s.whatsapp.net", { image: { url: `https://files.catbox.moe/iclcf6.jpeg` }, caption: up })
+
+}
+})
+conn.ev.on('creds.update', saveCreds)  
+
+conn.ev.on('messages.upsert', async(mek) => {
+mek = mek.messages[0]
+if (!mek.message) return	
+mek.message = (getContentType(mek.message) === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message
+if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_READ_STATUS === "true"){
+await conn.readMessages([mek.key]) 
+}
+	if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_STATUS_REPLY === "true"){
   const user = mek.key.participant
-  const text = `${config.AUTO_STATUS_MSG}`
+  const text = `${config.AUTO_STATUS__MSG}`
   await conn.sendMessage(user, { text: text, react: { text: '💜', key: mek.key } }, { quoted: mek })
-            }
-            await Promise.all([
-              saveMessage(mek),
-            ]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
+        
+}
 const m = sms(conn, mek)
 const type = getContentType(mek.message)
 const content = JSON.stringify(mek.message)
