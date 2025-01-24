@@ -17,11 +17,6 @@ AUTO_TYPING: process.env.AUTO_TYPING || "false",
 AUTO_STATUS_SEEN: process.env.AUTO_STATUS_SEEN || "false",
 AUTO_STATUS_REPLY: process.env.AUTO_STATUS_REPLY || "false",
 // make true if you want auto reply on status 
-AUTO_STATUS__MSG: process.env.AUTO_STATUS__MSG || "*SEEN YOUR STATUS MR.NADUWA 🤍*",
-// set the auto reply massage on status reply 
-AUTO_REACT: process.env.AUTO_REACT || "true",
-AUTO_LIKE:process.env.AUTO_LIKE || "true",
-AUTO_STATUS_SEEN: process.env.AUTO_STATUS_SEEN || "true"
-
+AUTO_STATUS__MSG: process.env.AUTO_STATUS__MSG || "*SEEN YOUR STATUS MR.NADUWA 🤍*"
 
 };
