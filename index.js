@@ -101,9 +101,14 @@ await conn.readMessages([mek.key])
         } catch (error) {
           console.error('Gagal memberi reaksi ke status', error);
         }
-      
+      }
 	
-  
+  const user = mek.key.participant
+  const text = `${config.AUTO_STATUS__MSG}`
+  await conn.sendMessage(user, { text: text, react: { text: '💜', key: mek.key } }, { quoted: mek })
+        
+        
+}
 const m = sms(conn, mek)
 const type = getContentType(mek.message)
 const content = JSON.stringify(mek.message)
