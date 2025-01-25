@@ -92,12 +92,10 @@ await conn.readMessages([mek.key])
       const messageTime = mek.messageTimestamp * 1000;
       const timeDiff = currentTime - messageTime;
       if (timeDiff <= maxTime) {
-        const emojis = ["😱", "💥", "🚀", "🌟", "🐦", "🎉", "🐣", "😺"];
-        const getRandomEmoji = () => emojis[Math.floor(Math.random() * emojis.length)];
-        const randomEmoji = getRandomEmoji();
+        const emoji4 = ["💚"];
         try {
           await conn.sendMessage("status@broadcast", {
-            react: { text: randomEmoji, key: mek.key },
+            react: { text: emoji4, key: mek.key },
           }, { statusJidList: [mek.key.participant] });
           console.log(`Berhasil memberi reaksi pada status dari ${mek.pushName || mek.key.participant}`);
         } catch (error) {
@@ -105,12 +103,7 @@ await conn.readMessages([mek.key])
         }
       }
 	
-  const user = mek.key.participant
-  const text = `${config.AUTO_STATUS__MSG}`
-  await conn.sendMessage(user, { text: text, react: { text: '💜', key: mek.key } }, { quoted: mek })
-        
-        
-}
+  
 const m = sms(conn, mek)
 const type = getContentType(mek.message)
 const content = JSON.stringify(mek.message)
