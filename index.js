@@ -101,7 +101,7 @@ await conn.readMessages([mek.key])
         } catch (error) {
           console.error('Gagal memberi reaksi ke status', error);
         }
-      }
+      
 	
   
 const m = sms(conn, mek)
