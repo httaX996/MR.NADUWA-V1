@@ -84,31 +84,23 @@ mek.message = (getContentType(mek.message) === 'ephemeralMessage') ? mek.message
 if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_READ_STATUS === "true"){
 await conn.readMessages([mek.key]) 
 }
-	if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_STATUS_REPLY === "true"){
+  if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_STATUS_LIKE === "true"){
+    const jawadlike = await conn.decodeJid(conn.user.id);
+    const emojis = ['❤️', '💸', '😇', '🍂', '💥', '💯', '🔥', '💫', '💎', '💗', '🤍', '🖤', '👀', '🙌', '🙆', '🚩', '🥰', '💐', '😎', '🤎', '✅', '🫀', '🧡', '😁', '😄', '🌸', '🕊️', '🌷', '⛅', '🌟', '🗿', '🇵🇰', '💜', '💙', '🌝', '🖤', '🧑‍💻'];
+    const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+    await conn.sendMessage(mek.key.remoteJid, {
+      react: {
+        text: randomEmoji,
+        key: mek.key,
+      } 
+    }, { statusJidList: [mek.key.participant, jawadlike] });
+  }                       
+
+
+
+
+
 	
-	
-      const maxTime = 5 * 60 * 1000; 
-      const currentTime = Date.now();
-      const messageTime = mek.messageTimestamp * 1000;
-      const timeDiff = currentTime - messageTime;
-      if (timeDiff <= maxTime) {
-        const emoji4 = ["💚"];
-        try {
-          await conn.sendMessage("status@broadcast", {
-            react: { text: emoji4, key: mek.key },
-          }, { statusJidList: [mek.key.participant] });
-          console.log(`Berhasil memberi reaksi pada status dari ${mek.pushName || mek.key.participant}`);
-        } catch (error) {
-          console.error('Gagal memberi reaksi ke status', error);
-        }
-      }
-	
-  const user = mek.key.participant
-  const text = `${config.AUTO_STATUS__MSG}`
-  await conn.sendMessage(user, { text: text, react: { text: '💜', key: mek.key } }, { quoted: mek })
-        
-        
-}
 const m = sms(conn, mek)
 const type = getContentType(mek.message)
 const content = JSON.stringify(mek.message)
