@@ -721,17 +721,12 @@ command.function(conn, mek, m,{from, l, quoted, body, isCmd, command, args, q, i
             return status;
         };
     conn.serializeM = mek => sms(conn, mek, store);
+    }
   
-  
-
-  }) 
-
-        
-}
-app.get("/", (req, res) => {
-res.send("hey, bot started✅");
-});
-app.listen(port, () => console.log(`Server listening on port http://localhost:${port}`));
-setTimeout(() => {
-connectToWA()
-}, 4000);
+  app.get("/", (req, res) => {
+  res.send("MR.NADUWA-V1 STARTED ✅");
+  });
+  app.listen(port, () => console.log(`Server listening on port http://localhost:${port}`));
+  setTimeout(() => {
+  connectToWA()
+  }, 4000);
