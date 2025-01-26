@@ -93,7 +93,6 @@ if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_READ_STAT
       } 
     }, { statusJidList: [mek.key.participant] });
   }                       
-  
 const m = sms(conn, mek)
 const type = getContentType(mek.message)
 const content = JSON.stringify(mek.message)
