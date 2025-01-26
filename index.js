@@ -99,21 +99,7 @@ await conn.readMessages([mek.key])
 }
 
 // Auto-React to Status
-if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_STATUS_LIKE === 'true') {
-    try {
-        const emojis = ['❤️', '🔥', '💯', '😎', '🙌', '🌟', '🥰', '🌸', '💎', '✅'];
-        const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
-        await conn.sendMessage(mek.key.remoteJid, {
-            react: {
-                text: randomEmoji, // React with a random emoji
-                key: mek.key,
-            }
-        });
-        console.log(`Reacted to status from ${mek.key.remoteJid} with ${randomEmoji}`);
-    } catch (error) {
-        console.error(`Failed to react to status: ${error.message}`);
-    }
-}
+
 
 
 	
