@@ -724,7 +724,7 @@ command.function(conn, mek, m,{from, l, quoted, body, isCmd, command, args, q, i
   
   
 
-   
+  }) 
 
         
 }
