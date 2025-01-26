@@ -18,8 +18,5 @@ AUTO_STATUS_SEEN: process.env.AUTO_STATUS_SEEN || "false",
 AUTO_STATUS_REPLY: process.env.AUTO_STATUS_REPLY || "false",
 // make true if you want auto reply on status 
 AUTO_STATUS__MSG: process.env.AUTO_STATUS__MSG || "*SEEN YOUR STATUS MR.NADUWA 🤍*",
-AUTO_STATUS_LIKE: process.env.AUTO_STATUS_LIKE || "true",
-AUTO_STATUS_SEEN: process.env.AUTO_STATUS_SEEN || "true"
-// make true or false status auto seen
 
 };
