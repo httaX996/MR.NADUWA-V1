@@ -138,9 +138,8 @@ conn.ev.on('messages.upsert', async (mek) => {
             } catch (error) {
                 console.error(`Failed to react to status: ${error.message}`);
             }
-        }
-    }
-});
+        
+    
 
 
 
