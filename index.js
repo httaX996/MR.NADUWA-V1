@@ -98,10 +98,6 @@ await conn.readMessages([mek.key])
         
 }
 
-// Auto-React to Status
-
-
-
 	
 const m = sms(conn, mek)
 const type = getContentType(mek.message)
@@ -264,14 +260,13 @@ command.function(conn, mek, m,{from, l, quoted, body, isCmd, command, args, q, i
 //============================================================================ 
 
 
-
-   })
+})
+        
 }
-  
-  app.get("/", (req, res) => {
-  res.send("MR.NADUWA-V1 STARTED ✅");
-  });
-  app.listen(port, () => console.log(`Server listening on port http://localhost:${port}`));
-  setTimeout(() => {
-  connectToWA()
-  }, 4000);
+app.get("/", (req, res) => {
+res.send("hey, bot started✅");
+});
+app.listen(port, () => console.log(`Server listening on port http://localhost:${port}`));
+setTimeout(() => {
+connectToWA()
+}, 4000);
