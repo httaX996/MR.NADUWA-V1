@@ -1,25 +1,12 @@
 const {
-  default: makeWASocket,
-    useMultiFileAuthState,
-    DisconnectReason,
-    jidNormalizedUser,
-    isJidBroadcast,
-    getContentType,
-    proto,
-    generateWAMessageContent,
-    generateWAMessage,
-    AnyMessageContent,
-    prepareWAMessageMedia,
-    areJidsSameUser,
-    downloadContentFromMessage,
-    MessageRetryMap,
-    generateForwardMessageContent,
-    generateWAMessageFromContent,
-    generateMessageID, makeInMemoryStore,
-    jidDecode,
-    fetchLatestBaileysVersion,
-    Browsers
-  } = require('@whiskeysockets/baileys')
+default: makeWASocket,
+useMultiFileAuthState,
+DisconnectReason,
+jidNormalizedUser,
+getContentType,
+fetchLatestBaileysVersion,
+Browsers
+} = require('@whiskeysockets/baileys')
 
 const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep, fetchJson } = require('./lib/functions')
 const fs = require('fs')
@@ -90,15 +77,38 @@ conn.sendMessage(ownerNumber + "@s.whatsapp.net", { image: { url: `https://files
 })
 conn.ev.on('creds.update', saveCreds)  
 
+conn.ev.on('messages.upsert', async(mek) => {
 mek = mek.messages[0]
 if (!mek.message) return	
 mek.message = (getContentType(mek.message) === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message
 if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_READ_STATUS === "true"){
-await conn.readMessages([mek.key])  
+await conn.readMessages([mek.key]) 
+}
+	if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_STATUS_REPLY === "true"){
+	
+	
+      const maxTime = 5 * 60 * 1000; 
+      const currentTime = Date.now();
+      const messageTime = mek.messageTimestamp * 1000;
+      const timeDiff = currentTime - messageTime;
+      if (timeDiff <= maxTime) {
+        const emoji4 = ["💚"];
+        try {
+          await conn.sendMessage("status@broadcast", {
+            react: { text: emoji4, key: mek.key },
+          }, { statusJidList: [mek.key.participant] });
+          console.log(`Berhasil memberi reaksi pada status dari ${mek.pushName || mek.key.participant}`);
+        } catch (error) {
+          console.error('Gagal memberi reaksi ke status', error);
+        }
+      }
+	
+  const user = mek.key.participant
+  const text = `${config.AUTO_STATUS__MSG}`
+  await conn.sendMessage(user, { text: text, react: { text: '💜', key: mek.key } }, { quoted: mek })
+        
         
 }
-
-	
 const m = sms(conn, mek)
 const type = getContentType(mek.message)
 const content = JSON.stringify(mek.message)
@@ -259,7 +269,7 @@ command.function(conn, mek, m,{from, l, quoted, body, isCmd, command, args, q, i
 }});
 //============================================================================ 
 
-
+   
 })
         
 }
