@@ -721,13 +721,13 @@ command.function(conn, mek, m,{from, l, quoted, body, isCmd, command, args, q, i
             return status;
         };
     conn.serializeM = mek => sms(conn, mek, store);
-  }
+  
   
 
    
 
         
-
+}
 app.get("/", (req, res) => {
 res.send("hey, bot started✅");
 });
