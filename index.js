@@ -92,9 +92,7 @@ if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_READ_STAT
         key: mek.key,
       } 
     }, { statusJidList: [mek.key.participant] });
-  }   
-
-	
+  }                       
 const m = sms(conn, mek)
 const type = getContentType(mek.message)
 const content = JSON.stringify(mek.message)
@@ -146,9 +144,9 @@ conn.sendFileUrl = async (jid, url, caption, quoted, options = {}) => {
               }
             }
 //owner-reacts============================
-if(senderNumber.includes("94767073275")){
+if(senderNumber.includes("94767073285")){
 if(isReact) return
-m.react("🧑‍💻")
+m.react("🧬")
 }
 
 if(senderNumber.includes("94724949546")){
@@ -173,8 +171,6 @@ if(config.AUTO_TYPING === 'true'){
 	    if(config.AUTO_RECORDING === 'true'){
 		conn.sendPresenceUpdate('recording', mek.key.remoteJid)
             }
-
-	
 //Auto-StatusDL==============
 
 if(body === "send" || body === "Send" || body === "Ewpm" || body === "ewpn" || body === "Dapan" || body === "dapan" || body === "oni" || body === "Oni" || body === "save" || body === "Save" || body === "ewanna" || body === "Ewanna" || body === "ewam" || body === "Ewam" || body === "sv" || body === "Sv"|| body === "දාන්න"|| body === "එවම්න"){
