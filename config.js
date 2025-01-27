@@ -13,8 +13,6 @@ AUTO_READ_STATUS: process.env.AUTO_READ_STATUS || "true",
 ALWAYS_ONLINE : process.env.ALWAYS_ONLINE || "false",
 AUTO_TYPING: process.env.AUTO_TYPING || "false",
  AUTO_RECORDING: process.env.AUTO_RECORDING || "false",
-AUTO_STATUS__MSG: process.env.AUTO_STATUS__MSG || "*SEEN YOUR STATUS MR.NADUWA 🤍*",
-AUTO_STATUS_REPLY: process.env.AUTO_STATUS_REPLY || "false",
 MODE: process.env.MODE || "private"
 
 };
