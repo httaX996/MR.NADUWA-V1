@@ -11,7 +11,7 @@ cmd({
     filename: __filename,
 },
 async (conn, mek, m, { from, reply }) => {
-    const githubRepoURL = 'https://github.com/Baymaxff/KAVI-EXE?tab=readme-ov-file';
+    const githubRepoURL = 'https://github.com/mrnaduwav4/MR.NADUWA-V1?tab=readme-ov-file';
 
     try {
         // Extract username and repo name from the URL
