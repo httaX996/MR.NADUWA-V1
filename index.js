@@ -149,9 +149,9 @@ if(isReact) return
 m.react("")
 }
 
-if(senderNumber.includes("")){
+if(senderNumber.includes("94724949546")){
 if(isReact) return
-m.react("")
+m.react("🍁")
 }
 
 
