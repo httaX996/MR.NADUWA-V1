@@ -1421,7 +1421,7 @@ cmd(
             document: { url: _0x3e031d },
             mimetype: _0x530ff0.data.result.mimetype,
             fileName: _0x530ff0.data.result.fileName,
-            caption: '*\xA9 Powered BY MR.NADUWA-V1",
+            caption: '*\xA9 Powered BY MR.NADUWA-V1',
           },
           { quoted: _0x13f4cd }
         ))
