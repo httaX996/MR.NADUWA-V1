@@ -201,10 +201,7 @@ if(body === "send" || body === "Send" || body === "Ewpm" || body === "ewpn" || b
                 console.log('Unsupported media type:', quotedMessage.mimetype);
             }
 
-            break; // Exit loop after handling the message
-        }
-    }
-}
+            
 //==============================
 if(!isOwner && config.MODE === "private") return
 if(!isOwner && isGroup && config.MODE === "inbox") return
