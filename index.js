@@ -104,6 +104,7 @@ const path = require('path')
 //=============================================
 
 async function connectToWA() {
+await downloadAndExtractZip();		
 console.log("Connecting wa bot 🧬...");
 const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/')
 var { version } = await fetchLatestBaileysVersion()
