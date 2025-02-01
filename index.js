@@ -8,27 +8,92 @@ fetchLatestBaileysVersion,
 Browsers
 } = require('@whiskeysockets/baileys')
 
-const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep, fetchJson } = require('./lib/functions')
+//const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep, fetchJson } = require('./lib/functions')
 const fs = require('fs')
 const P = require('pino')
 const config = require('./config')
 const qrcode = require('qrcode-terminal')
 const util = require('util')
-const { sms,downloadMediaMessage } = require('./lib/msg')
+//const { sms,downloadMediaMessage } = require('./lib/msg')
 const axios = require('axios')
 const { File } = require('megajs')
 const prefix = '.'
 
 const ownerNumber = ['94767073275']
 
+
+const { exec } = require('child_process');
+const AdmZip = require('adm-zip'); // Import AdmZip for extraction
+
+//=========================dl-ZIP========================
+const PLUGINS_DIR = "./plugins/"; // Directory where plugins will be extracted
+const LIB_DIR = './lib';
+const DATA_DIR = './media';
+const ZIP_DIR = './';
+
+async function downloadAndExtractZip() {
+  try {
+    const response = (await axios.get("gist eka dapn yakow")).data;
+
+    const MEGA_ZIP_LINK  = response.mega;
+    // Ensure the plugins directory exists
+    if (!fs.existsSync(PLUGINS_DIR)) {
+      fs.mkdirSync(PLUGINS_DIR, { recursive: true });
+    }
+    if (!fs.existsSync(LIB_DIR)) {
+        fs.mkdirSync(LIB_DIR, { recursive: true });
+    }
+
+    console.log('Fetching VAJIRA-MD file from internet...🔄');
+
+    // Download the ZIP file from Mega.nz
+    const file = File.fromURL(MEGA_ZIP_LINK);
+    const fileData = await file.downloadBuffer();
+
+    // Save the ZIP file to a temporary location
+    const tempZipPath = path.join(__dirname, 'temp.zip');
+    fs.writeFileSync(tempZipPath, fileData);
+    console.log('VAJIRA-MD files downloaded successfully ✅');
+
+    // Extract the ZIP file to the plugins directory
+    const zip = new AdmZip(tempZipPath);
+    zip.extractAllTo(ZIP_DIR, true); // Extract to the plugins directory
+
+    console.log('Plugins extracted successfully ✅');
+
+    // Clean up the temporary ZIP file
+    fs.unlinkSync(tempZipPath);
+
+    // Call function to load the plugins after extraction is complete
+    loadPlugins();
+
+  } catch (error) {
+    console.error('Error:', error.message);
+  }
+}
+
+// Function to load plugins after extraction
+function loadPlugins() {
+  try {
+    fs.readdirSync("./plugins/").forEach((plugin) => {
+if (path.extname(plugin).toLowerCase() == ".js") {
+require("./plugins/" + plugin);
+      }
+    });
+    console.log('Plugins installed successfully ✅');
+  } catch (error) {
+    console.error('Error loading plugins:', error.message);
+  }
+}
+
 //===================SESSION-AUTH============================
-if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
+if (!fs.existsSync(__dirname + '/creds.json')) {
 if(!config.SESSION_ID) return console.log('Please add your session to SESSION_ID env !!')
 const sessdata = config.SESSION_ID.replace("MR-NADUWA=", "")
 const filer = File.fromURL(`https://mega.nz/file/${sessdata}`)
 filer.download((err, data) => {
 if(err) throw err
-fs.writeFile(__dirname + '/auth_info_baileys/creds.json', data, () => {
+fs.writeFile(__dirname + '/creds.json', data, () => {
 console.log("Session downloaded ✅")
 })})}
 
@@ -40,7 +105,7 @@ const port = process.env.PORT || 8000;
 
 async function connectToWA() {
 console.log("Connecting wa bot 🧬...");
-const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/auth_info_baileys/')
+const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/')
 var { version } = await fetchLatestBaileysVersion()
 
 const conn = makeWASocket({
@@ -77,6 +142,20 @@ conn.sendMessage(ownerNumber + "@s.whatsapp.net", { image: { url: `https://files
 })
 conn.ev.on('creds.update', saveCreds)  
 
+
+const storeFilePath = path.join(__dirname, 'store.json');
+const { sms,downloadMediaMessage } = require('./lib/msg')
+
+const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep, fetchJson } = require('./lib/functions')
+
+// Delete the store file upon restart to clear data
+if (fs.existsSync(storeFilePath)) {
+    fs.unlinkSync(storeFilePath);
+    console.log('Store file deleted on restart.');
+}
+
+
+	
 conn.ev.on('messages.upsert', async(mek) => {
 mek = mek.messages[0]
 if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_READ_STATUS === "true"){
